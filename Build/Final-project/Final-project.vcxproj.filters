@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\src\Final-project.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8C02EA41-6665-3D91-BADB-D3A532FB1553}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

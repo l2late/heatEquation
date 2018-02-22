@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{9B424884-8921-357E-85FB-2DB19C6675D4}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>Final-project_assignment</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-HC:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation" "-BC:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build" --check-stamp-file "C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/CMakeLists.txt;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-HC:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation" "-BC:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build" --check-stamp-file "C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/CMakeLists.txt;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-HC:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation" "-BC:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build" --check-stamp-file "C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/CMakeLists.txt;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-HC:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation" "-BC:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build" --check-stamp-file "C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/CMakeLists.txt;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Final-project\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\CMakeFiles\ddac3ae37989354c1a489cea334467cc\Final-project_assignment.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy "C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/src/Final-project.cxx" Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== Start Environment " &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "PROJECT_NAME = Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_SYSTEM = Windows-10.0.16299" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_VERSION = 3.7.2" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_CXX_COMPILER_ID = MSVC" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_CXX_COMPILER_VERSION = 19.11.25547.0" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== End Environment " &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== Start of output from execution of binary Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+Debug\Final-project.exe &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== End of output from execution of binary Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build/CMakeFiles/ddac3ae37989354c1a489cea334467cc/Final-project_assignment.rule;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\Debug\Final-project.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\Final-project_assignment</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy "C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/src/Final-project.cxx" Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== Start Environment " &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "PROJECT_NAME = Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_SYSTEM = Windows-10.0.16299" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_VERSION = 3.7.2" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_CXX_COMPILER_ID = MSVC" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_CXX_COMPILER_VERSION = 19.11.25547.0" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== End Environment " &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== Start of output from execution of binary Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+Release\Final-project.exe &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== End of output from execution of binary Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build/CMakeFiles/ddac3ae37989354c1a489cea334467cc/Final-project_assignment.rule;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\Release\Final-project.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\Final-project_assignment</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy "C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/src/Final-project.cxx" Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== Start Environment " &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "PROJECT_NAME = Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_SYSTEM = Windows-10.0.16299" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_VERSION = 3.7.2" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_CXX_COMPILER_ID = MSVC" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_CXX_COMPILER_VERSION = 19.11.25547.0" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== End Environment " &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== Start of output from execution of binary Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+MinSizeRel\Final-project.exe &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== End of output from execution of binary Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build/CMakeFiles/ddac3ae37989354c1a489cea334467cc/Final-project_assignment.rule;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\MinSizeRel\Final-project.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\Final-project_assignment</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy "C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Final-project/src/Final-project.cxx" Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== Start Environment " &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "PROJECT_NAME = Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_SYSTEM = Windows-10.0.16299" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_VERSION = 3.7.2" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_CXX_COMPILER_ID = MSVC" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "CMAKE_CXX_COMPILER_VERSION = 19.11.25547.0" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== End Environment " &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== Start of output from execution of binary Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+RelWithDebInfo\Final-project.exe &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo "=== End of output from execution of binary Final-project" &gt;&gt; Final-project.log
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build/CMakeFiles/ddac3ae37989354c1a489cea334467cc/Final-project_assignment.rule;C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\RelWithDebInfo\Final-project.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\Final-project_assignment</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\Final-project\CMakeFiles\Final-project_assignment" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build/ZERO_CHECK.vcxproj">
+      <Project>C216755B-1AEA-33C0-A270-647C082DE2FC</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/lucas/Documents/Master Vehicle Engineering/2. Object Oriented Programming in C++/Final Project/heatEquation/Build/Final-project/Final-project.vcxproj">
+      <Project>24E653E8-1C70-351A-950C-7B46E9D34CCB</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

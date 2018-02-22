@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\lucas\Documents\Master Vehicle Engineering\2. Object Oriented Programming in C++\Final Project\heatEquation\Build\CMakeFiles\ddac3ae37989354c1a489cea334467cc\RUN_TESTS_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{93F74437-B79F-3197-B24A-F6DB2962888F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
