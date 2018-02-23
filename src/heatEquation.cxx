@@ -5,6 +5,8 @@
 #include <array>
 #include <exception>
 
+using keytype = const std::array<int,2>;
+
 template<typename T>
 class Vector
 {
@@ -66,7 +68,7 @@ public:
             data = other.data;
             other.length = 0;
             other.data = nullptr;
-            delete[] other.data; //
+            delete[] other.data;
         }
         return *this;
     }
@@ -169,20 +171,16 @@ public:
     {
         for(auto i=0; i<row; i++) {
             for(auto j=0; j<col; j++) {
-                std::array<int, 2> index{{i,j}};
+                keytype index{{i,j}};
                 elem[index] = 0;
             }
         }
     }
     
-//    std::array<int, 2> elem(int i, int j);
+//    ~Matrix():
+//    row(0), col(0)
 //    {
-//        return std::array<int, 2> elem;
-//    }
-//
-//    T operator[](int i, int j)
-//    {
-//        return elem[{i,j}];
+//        elem::erase();
 //    }
     
     template<typename V1, typename V2>
@@ -202,7 +200,7 @@ public:
 private:
     const int row;
     const int col;
-    std::map<const std::array<int,2>, T> elem;
+    std::map<, T> elem;
 };
 
 int main() {
