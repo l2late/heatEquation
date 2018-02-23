@@ -1,215 +1,146 @@
-#include <stdio.h>
-#include <iostream>
+/**
+ * \file Final-project.cxx
+ *
+ * This file is the basis for the final project for Object Oriented Scientific Programming in C++
+ *
+ */
+
+// Include header file for standard input/output stream library
+#include <cmath>
+#include <ostream>
+#include <iomanip>
+#include <exception>
 #include <initializer_list>
-#include <map>
-#include <array>
 
-template<typename T>
-class Vector
+
+// The global main function that is the designated start of the program
+template<typename T> 
+class Vector 
+{	
+																							// SHOULD ATTRIBUTES BE HIDDEN?
+	public
+	int length;
+	T* data;
+
+// default constructor
+Vector()
+	: data(nullptr),
+	length(0)
+{}
+
+// constructor with length as argument
+Vector(int length)
+	: data(new T(length)),		//																IS THIS CORRECT?
+	length(length)
+{}
+
+// Constructor using another vector as input
+Vector(Vector other)
+	: Vector(other.length)
 {
-public:
-    //default constructor
-    Vector():
-    length(0), data(nullptr)
-    {}
-    
-    //constructor
-    Vector(int length):
-    length(length), data(new T[length])
-    {}
-    
-    //copy constructor
-    Vector(const Vector& v):
-    Vector(v.length)
-    {
-        for(auto i=0; i<v.length; i++)
-            data[i] = v.data[i];
-    }
-    
-    //list constructor
-    Vector(std::initializer_list<T> list):
-    Vector((int)list.size())
-    {
-        std::uninitialized_copy(list.begin(), list.end(), data);
-    }
-    
-    //Destructor
-    ~Vector()
-    {
-        delete[] data;
-        length = 0;
-    }
-    
-    
-    //copy assignment
-    Vector& operator=(const Vector& other)
-    {
-        if(this != &other)
-        {
-            delete[] data;
-            length = other.length;
-            data = new T[other.length];
-            for (auto i=0; i<other.length; i++)
-                data[i] = other.data[i];
-        }
-        return *this;
-    }
-    
-    //move assignment
-    Vector& operator=(Vector&& other)
-    {
-        if(this != &other)
-        {
-            delete[] data;
-            length = other.length;
-            data = other.data;
-            other.length = 0;
-            other.data = nullptr;
-        }
-        return *this;
-    }
-    
-    Vector operator+(const Vector& other) const
-    {
-        if(length == other.length)
-        {
-            Vector v(length);
-            for(auto i=0; i<length; i++)
-                v.data[i] = data[i] + other.data[i];
-            return v;
-        }
-        else
-        {
-            throw 0;
-        }
-    }
-    
-    Vector operator-(const Vector& other) const
-    {
-        if(length == other.length)
-        {
-            Vector v(length);
-            for(auto i=0; i<length; i++)
-                v.data[i] = data[i] - other.data[i];
-            return v;
-        }
-        else
-        {
-            throw 0;
-        }
-    }
-    
-    T operator[](int i) const
-    {
-        return data[i];
-    }
-    
-    
-    // type deduction???
-    template<typename S>
-    Vector operator*=(const S& scalar) const
-    {
-            Vector v(length);
-            for(auto i=0; i<length; i++)
-                v.data[i] = data[i] * scalar;
-            return v;
-    }
-    
-    // right multiplication as member function
-    template<typename S>
-    Vector operator*(const S& scalar) const
-    {
-        // type deduction???
-        return this *= scalar;
-    }
-    
-private:
-    int length;
-    T *data;
-
-};
-
-//Vector left multiplication with scalar as non member function
-//The lhs Vector is a copy and not a reference.
-//This allows the compiler to make optimizations such as copy elision / move semantics.
-template<typename T, typename S>
-Vector<T> operator*(Vector<T> lhs, S const& scalar)
-{
-    return lhs *= scalar;
+	data = other.data;     // of data(new T(length)) met loop erach
 }
 
-// DOT product
-template<typename T>
-T dot(const Vector<T>& l, const Vector<T>& r)
+
+// Constructor that takes an intialiser list representing the contents of this vector
+Vector(std::initializer_list<T> list)
+	: Vector((int)list.size())
 {
-    if(l.length == r.length)
-    {
-        T result = 0;
-        for(auto i=0; i,l.length; i++)
-            // type deduction???
-            result += l.data[i] * r.data[i];
-        
-        return result;
-    }
+	std::uninitialized_copy(list.begin(), list.end(), data);
 }
 
-template<typename T>
-class Matrix
+// copy assignment
+Vector& operator=(const Vector& other)
 {
-public:
-    Matrix(int row, int col):
-    row(row), col(col)
-    {
-        for(auto i=0; i<row; i++) {
-            for(auto j=0; j<col; j++) {
-                std::array<int, 2> index{{i,j}};
-                elem[index] = 0;
-            }
-        }
-    }
-    
-//    std::array<int, 2> elem(int i, int j);
-//    {
-//        return std::array<int, 2> elem;
-//    }
-//
-//    T operator[](int i, int j)
-//    {
-//        return elem[{i,j}];
-//    }
-    
-    template<typename V1, typename V2>
-    Vector<V1> matvec(const Vector<V2>& rhs) const
-    {
-        if(rhs.length == col){
-            Vector<V1> vec(row);
-            for(auto i=0; i<row; i++){
-                for(auto j=0; j<col; j++){
-                    vec[i] += elem[{i,j}] * rhs[j];
-                    }
-                }
-            return vec;
-            }
-    }
-    
-private:
-    const int row;
-    const int col;
-    std::map<const std::array<int,2>, T> elem;
+	if (this != &other)
+	{
+		delete[] data;
+		length	= other.length;
+		data = new T(other.length);
+		for (auto i = 1; i<other.length; i++)
+			data[i] = other.data[i]
+	}
+	return *this
+}
+
+
+// Move assignment																				HOW DO YOU KNOW DIFFERENCE?
+Vector& operator=(Vector&& other)
+{
+	if (this != &other)
+	{
+		delete[] data;
+		length = other.length;
+		data = other.data;
+		other.data = nullptr;							// WAT IS HIER DE JUISTE VOLGORDE?
+		other.length = 0;
+	}
+	return *this;
+}
+
+// Sum operator																			MOET HIERBIJ HET ORIGINEEL HETZELFDE BLIJVEN?
+Vector& operator+(const Vector& other)
+{
+	// Throw exception if the vectors have different length
+	if (length != other.length) throw "Vectors have different size!";
+
+	// Add two vectors
+	for (auto i = 0; i<length; i++)													// WERKT DIT MET VERSCHILLENDE SOORTEN?
+		data[i] += other.data[i];
+
+	return *this;
+}
+
+// Subtraction operator
+Vector& operator-(const Vector& other)
+{
+	// Throw exception if the vectors have different length
+	if (length != other.length) throw "Vectors have different size!";
+
+	// Add two vectors
+	for (auto i = 0; i<length; i++)
+		data[i] -= other.data[i];
+
+	return *this;
+}
+
+// Right multiplication
+Vector& operator*(const double scalar)
+{
+	for (auto i = 0; i < length; i++)
+		data[i] = data[i] * scalar;
+	
+	return *this;
+}
+
+// Left multiplication
+
+Vector& operator*(const Vector& other)
+{
+	
+	Vector result(other.length)
+
+	for (auto i = 0; i < length; i++)
+		result.data[i] = other.data[i] * this;
+	return *result;
+}
+// destructor
+~Vector()
+{
+	delete[] data;
+	length = 0;
+}
+
 };
 
-int main() {
-    
-    Vector<int> a(4);
-    Vector<int> b = { 1, 2, 3, 4 };
-    Vector<int> c;
-    c = a + b;
-    Matrix<double> M(2,4);
-    M.matvec(b);
-    
-    
-//    for(auto i=0; i<c.length; i++)
-//        std::cout << c.data[i] << std::endl;
-    
-    return 0;
-};
+
+
+
+int main()
+{
+
+
+
+
+return 0; 
+}
