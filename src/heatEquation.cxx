@@ -3,6 +3,7 @@
 #include <initializer_list>
 #include <map>
 #include <array>
+#include <exception>
 
 template<typename T>
 class Vector
@@ -50,7 +51,7 @@ public:
             length = other.length;
             data = new T[other.length];
             for (auto i=0; i<other.length; i++)
-                data[i] = other.data[i];
+                data[i] = other[i];
         }
         return *this;
     }
@@ -65,6 +66,7 @@ public:
             data = other.data;
             other.length = 0;
             other.data = nullptr;
+            delete[] other.data; //
         }
         return *this;
     }
@@ -90,7 +92,7 @@ public:
         {
             Vector v(length);
             for(auto i=0; i<length; i++)
-                v.data[i] = data[i] - other.data[i];
+                v.data[i] = data[i] - other[i];
             return v;
         }
         else
@@ -99,11 +101,15 @@ public:
         }
     }
     
-    T operator[](int i) const
+    T operator[](const int i) const
     {
         return data[i];
     }
     
+    T & operator[](const int i)
+    {
+        return data[i];
+    }
     
     // type deduction???
     template<typename S>
@@ -111,7 +117,7 @@ public:
     {
             Vector v(length);
             for(auto i=0; i<length; i++)
-                v.data[i] = data[i] * scalar;
+                v[i] = data[i] * scalar;
             return v;
     }
     
@@ -133,9 +139,10 @@ private:
 //The lhs Vector is a copy and not a reference.
 //This allows the compiler to make optimizations such as copy elision / move semantics.
 template<typename T, typename S>
-Vector<T> operator*(Vector<T> lhs, S const& scalar)
+auto operator*(const S scalar, const Vector<T> rhs)
 {
-    return lhs *= scalar;
+    Vector<decltype(scalar*rhs[0])> vec;
+    return rhs *= scalar;
 }
 
 // DOT product
@@ -147,7 +154,7 @@ T dot(const Vector<T>& l, const Vector<T>& r)
         T result = 0;
         for(auto i=0; i,l.length; i++)
             // type deduction???
-            result += l.data[i] * r.data[i];
+            result += l[i] * r[i];
         
         return result;
     }
@@ -205,7 +212,7 @@ int main() {
     Vector<int> c;
     c = a + b;
     Matrix<double> M(2,4);
-    M.matvec(b);
+    //M.matvec(b);
     
     
 //    for(auto i=0; i<c.length; i++)
