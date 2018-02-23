@@ -140,7 +140,16 @@ class Matrix
 {
 public:
     Matrix(int rows, int columns)
-    : rows(rows), columns(columns){};
+    : rows(rows), columns(columns)
+    {
+        for(auto i=0; i<rows; i++)
+        {
+            for(auto j=0; j<columns; j++)
+            {
+                dataMap[{{i,j}}] = 0;
+            }
+        }
+    };
     
     ~Matrix()
     {
@@ -230,4 +239,3 @@ int main()
     
     return 0;
 }
-
