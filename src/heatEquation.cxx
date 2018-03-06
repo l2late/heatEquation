@@ -77,7 +77,7 @@ public:
     {
         if(length == other.length)
         {
-            Vector v(length);
+            Vector<decltype(data[1] + other[1])> v(length);
             for(auto i=0; i<length; i++)
                 v.data[i] = data[i] + other.data[i];
             return v;
@@ -92,7 +92,7 @@ public:
     {
         if(length == other.length)
         {
-            Vector v(length);
+            Vector<decltype(data[1] - other[1])> v(length);
             for(auto i=0; i<length; i++)
                 v.data[i] = data[i] - other[i];
             return v;
@@ -117,7 +117,7 @@ public:
     template<typename S>
     Vector operator*=(const S& scalar) const
     {
-            Vector v(length);
+            Vector<decltype(data[1]*scalar)> v(length);
             for(auto i=0; i<length; i++)
                 v[i] = data[i] * scalar;
             return v;
@@ -127,7 +127,6 @@ public:
     template<typename S>
     Vector operator*(const S& scalar) const
     {
-        // type deduction???
         return this *= scalar;
     }
     
