@@ -4,6 +4,8 @@
 #include <map>
 #include <array>
 #include <exception>
+# include <memory>
+# include <type_traits>
 
 using keytype = const std::array<int,2>;
 
