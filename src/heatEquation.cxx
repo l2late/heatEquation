@@ -177,12 +177,6 @@ public:
         }
     }
     
-//    ~Matrix():
-//    row(0), col(0)
-//    {
-//        elem::erase();
-//    }
-    
     template<typename V1, typename V2>
     Vector<V1> matvec(const Vector<V2>& rhs) const
     {
@@ -200,7 +194,7 @@ public:
 private:
     const int row;
     const int col;
-    std::map<, T> elem;
+    std::map<keytype, T> elem;
 };
 
 int main() {
