@@ -132,6 +132,12 @@ public:
         return this *= scalar;
     }
     
+    void print() const
+    {
+        for(auto i=0; i<this.length; i++)
+        std::cout <<
+    }
+    
 private:
     int length;
     T *data;
@@ -196,20 +202,4 @@ private:
     const int row;
     const int col;
     std::map<keytype, T> elem;
-};
-
-int main() {
-    
-    Vector<int> a(4);
-    Vector<int> b = { 1, 2, 3, 4 };
-    Vector<int> c;
-    c = a + b;
-    Matrix<double> M(2,4);
-    //M.matvec(b);
-    
-    
-//    for(auto i=0; i<c.length; i++)
-//        std::cout << c.data[i] << std::endl;
-    
-    return 0;
 };
