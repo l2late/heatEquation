@@ -20,8 +20,8 @@ public:
     
     ~Matrix()
     {
-        
-    }
+        dataMap.clear();
+    };
     
     auto & operator [](const keytype key)
     {
@@ -32,14 +32,14 @@ public:
     {
         auto it = this->dataMap.begin();
         std::cout << "Matrix datatype: " << typeid((*it).second).name() << std::endl;
-        for(auto i=0; i<rows; i++){
-            for(auto j=0; j<columns; j++){
-                keytype index{{i,j}};
-                auto it = this->dataMap.at(index);
-                std::cout << it << ", ";
-            }
-            std::cout << std::endl;
+        auto iter = 0;
+        for (auto& x: this->dataMap) {
+            std::cout << x.second << ", ";
+            if (iter!=0 & iter/this->rows == 0)
+                std::cout << std::endl;
+            iter++;
         }
+        std::cout << std::endl;
     }
     
     // methods
