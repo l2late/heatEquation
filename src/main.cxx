@@ -1,4 +1,19 @@
-#include "heatEquation.hxx"
+#include <initializer_list>
+#include <memory>
+#include <iostream>
+#include <type_traits>
+#include <exception>
+#include <map>
+#include <array>
+#include <math.h>
+#include <cmath>
+
+// Home made headers
+#include "vector.hxx"
+#include "matrix.hxx"
+#include "cg.hxx"
+#include "heat.hxx"
+
 
 int main(){
     Vector<double> a(6);
