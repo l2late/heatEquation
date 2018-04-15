@@ -40,17 +40,22 @@ int main(){
     // Add entries as:
     // M[{0,0}] = 1.0;
     
-    std::map<keytype, int> firstMap;
-    
-    
-    firstMap[{{0,0}}] = 1;
-    firstMap[{{1,0}}] = 0;
-    firstMap[{{2,0}}] = 0;
-    
     M.print();
     
     //firstMap.insert(std::pair<std::array<int,2>, int> (key1, 5));
     
+    // Check if Heat1D is working (attributes are put on public)
+    double alpha = 0.3125;
+    double dt = 0.1;
+    int m = 3;
+    
+    Heat1D MatrixCheck1D(alpha, m, dt);
+    
+    MatrixCheck1D.M.print();
+    
+    Heat2D MatrixCheck2D(alpha, m, dt);
+    
+    MatrixCheck2D.M.print();
     
     return 0;
     }

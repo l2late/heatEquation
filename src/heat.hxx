@@ -1,42 +1,19 @@
 #pragma once
-
+#include <cmath>
 const double pi = 3.14159265358979323846;
 
 class Heat1D
 {
 public:
 	Heat1D(const double alpha, const int m, const double dt)
-		: M(m, m), m(m), alpha(alpha), dt(dt)
+		: M(m, m), m(m), alpha(alpha), dt(dt), wStart(m)
 	{
-		double sumDkij;
-		double identity;
-
-		for (int i = 0; i<m; i++)
-		{
-			for (int j = 0; j<m; j++)
-			{
-				// node is itself
-				if (i == j)
-				{
-					sumDkij = -2;
-					identity = 1;
-				}
-				// node is right neighbor in first dimension
-				
-				if (i/m == j/m && j == i+1)
-				{
-					sumDkij = 1;
-					identity = 0;
-				}
-				else
-				{
-					sumDkij = 0;
-					identity = 0;
-				}
-				M[{ {i, j}}] = identity + alpha*dt / pow((1 / m + 1), 2)*sumDkij;
-			}
-		}
-
+        for(int i = 0; i < m; i++) {
+            M[{{i,i}}] = 1 -alpha*dt/0.0625*-2*1;
+            M[{{i,i+1}}] =  -alpha*dt/0.0625*1;
+            M[{{i+1,i}}] =  M[{{i,i+1}}];
+        }
+        
 		for (int i = 0; i<m; i++)
 			wStart[i] = sin(pi*(i / (m + i)));
 	}
@@ -61,7 +38,7 @@ public:
 		return w;
 	}
 
-private:
+public:
 	Matrix<double> M;
 	int const m;
 	double const alpha;
@@ -74,21 +51,25 @@ class Heat2D
 {
 	public:
 		Heat2D(const double alpha, const int m, const double dt)
-			: M(m, m), m(m), alpha(alpha), dt(dt)
+			: M(m*m, m*m), m(m), alpha(alpha), dt(dt)
 		{
-			Matrix<double> D(m,m);
-
-			for (int i = 0; i < m; i++)
-			{
-				for (int j = 0; j < m; j++)
-				{
-					if (i == j)
-						D[{ {i, j}}] = 1;
-
-				}
-			}
-
-
+            double dx = 1/(m+1);
+            
+            for(int i = 0; i<m*m; i++){
+                M[{{i,i}}] = 1 -alpha*dt/dx*dx*-2*2;
+            
+                if((i+1)/m == i/m){
+                    M[{{i,i+1}}] =  -alpha*dt/dx*dx*1;
+                    M[{{i+1,i}}] =  M[{{i,i+1}}];
+                }
+                
+                if(i+m < m*m){
+                    M[{{i,i+m}}] =  -alpha*dt/0.0625*1;
+                    M[{{i+m,i}}] =  M[{{i,i+1}}];
+                }
+        }
+            
+            
 		}
 
 		// Methods
@@ -111,7 +92,7 @@ class Heat2D
 			return w;
 		}
 
-	private: 
+	public:
 		Matrix<double> M;
 		int const m;
 		double const alpha;
