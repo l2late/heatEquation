@@ -4,8 +4,9 @@
 #include <map>
 #include <array>
 #include <exception>
-# include <memory>
-# include <type_traits>
+#include <memory>
+#include <type_traits>
+#include <typeinfo>
 
 using keytype = const std::array<int,2>;
 
@@ -132,10 +133,12 @@ public:
         return this *= scalar;
     }
     
-    void print() const
+    void print()
     {
-        for(auto i=0; i<this.length; i++)
-        std::cout <<
+        std::cout << "Vector datatype: " << typeid(this->data[0]).name() << std::endl;
+        for(auto i=0; i<this->length; i++)
+            std::cout << data[i] << ", ";
+    std::cout << std::endl;
     }
     
 private:
@@ -197,6 +200,21 @@ public:
             return vec;
             }
     }
+    
+    void print()
+    {
+        auto it = this->elem.begin();
+        std::cout << "Matrix datatype: " << typeid((*it).second).name() << std::endl;
+        for(auto i=0; i<row; i++){
+            for(auto j=0; j<row; j++){
+                keytype index{{i,j}};
+                auto it = this->elem.at(index);
+                std::cout << it << ", ";
+            }
+            std::cout << std::endl;
+        }
+    }
+    
     
 private:
     const int row;
