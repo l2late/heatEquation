@@ -15,7 +15,7 @@ public:
         }
         
 		for (int i = 0; i<m; i++)
-			wStart[i] = sin(pi*(i / (m + i)));
+			wStart[i] = sin(pi*(i / (m + 1)));
 	}
 
 	// Methods
