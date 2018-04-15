@@ -148,7 +148,7 @@ public:
         {
             for(auto j=0; j<columns; j++)
             {
-                dataMap[{{i,j}}] = 0;
+                dataMap[{{i,j}}] = (double) 0;
             }
         }
     };
@@ -219,15 +219,16 @@ T dot(const Vector<T>& l, const Vector<T>& r)
 template<typename T>
 int cg(const Matrix<T> &A, const Vector<T> &b, Vector<T> &x, T tol, int maxiter)
 {
-    Vector<T> p_k(b - A.matvec(x)), p_kP1, r_k(p_k), r_kP1, x_k(x), x_kP1; // Add a const before x? IDEA: maybe x is not put as a constant in the interface on purpose. Maybe we can change the value of x for each iteration. That way, we don't have to return x, as it just modifies the 'x_0' given to the function.
+    Matrix<T> helperA = A;
+    Vector<T> p_k(b - helperA.matvec(x)), p_kP1, r_k(p_k), r_kP1, x_k(x), x_kP1; // Add a const before x? IDEA: maybe x is not put as a constant in the interface on purpose. Maybe we can change the value of x for each iteration. That way, we don't have to return x, as it just modifies the 'x_0' given to the function.
     T alpha_k, beta_k;
     int k(0);
     
     while(dot(r_k, r_k)>tol*tol && k < maxiter - 1)
     {
-        alpha_k = dot(r_k, r_k) / dot(A.matvec(p_k), p_k);
+        alpha_k = dot(r_k, r_k) / dot(helperA.matvec(p_k), p_k);
         x_kP1 = x_k + alpha_k * p_k;
-        r_kP1 = r_k - alpha_k * A.matvec(p_k);
+        r_kP1 = r_k - alpha_k * helperA.matvec(p_k);
         beta_k = dot(r_kP1, r_kP1) / dot(r_k, r_k);
         p_kP1 = r_kP1 + beta_k * p_k;
         
@@ -253,9 +254,13 @@ int cg(const Matrix<T> &A, const Vector<T> &b, Vector<T> &x, T tol, int maxiter)
 
 class Heat1D
 {
+    
+public:
+    
     Heat1D(const double alpha, const int m, const double dt)
-    : M(m-1,m-1), m(m), alpha(alpha), dt(dt)
+    : M(m,m), m(m), alpha(alpha), dt(dt)
     {
+        
         
         double sumDkij;
         double identity;
@@ -296,18 +301,20 @@ class Heat1D
     
     Vector<double> solve(double t_end) const
     {
-        Vector<double> w_min = w;
+        Vector<double> w_new(w);
+        Vector<double> w_min(w);
         
         for(auto t = 0; t<t_end ; t += dt)
         {
-            int it = cg(M, w_min, w, 0.01, 50);
-            w_min(w);
+            cg(M, w_min, w_new, 0.01, 50);
+            w_min = (w_new);
         }
         
+        return w_new;
     }
 private:
     Matrix<double> M;
-    double const m;
+    int const m;
     double const alpha;
     double const dt;
     Vector<double> w;
