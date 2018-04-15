@@ -119,13 +119,13 @@ public:
     }
     
 private:
-    // Not putting the attributes on private. Is there a way to make that work?
+    
     T* data;
     int length;
     
 };
 
-// Specialisation of the left multiplication with a scalar (why must this be outside of the struct?)
+// Specialisation of the left multiplication with a scalar
 template<typename T, typename S>
 auto operator*(const S scalar, const Vector<T> vector)
 {
@@ -187,7 +187,17 @@ private:
     std::map<keytype, T> dataMap;
 };
 
-
+class Heat1D
+{
+    Heat1D(const double alpha, const int m, const double dt)
+    : M(m,1)
+    {
+        
+    }
+    
+private:
+    Matrix<double> M;
+};
 
 // Functions
 
@@ -200,6 +210,43 @@ T dot(const Vector<T>& l, const Vector<T>& r)
         dotproduct += l[i]*r[i];
     return dotproduct;
 }
+
+// Conjugate Gradient Function
+template<typename T>
+int cg(const Matrix<T> &A, const Vector<T> &b, Vector<T> &x, T tol, int maxiter)
+{
+    Vector<T> p_k(b - A.matvec(x)), p_kP1, r_k(p_k), r_kP1, x_k(x), x_kP1; // Add a const before x? IDEA: maybe x is not put as a constant in the interface on purpose. Maybe we can change the value of x for each iteration. That way, we don't have to return x, as it just modifies the 'x_0' given to the function.
+    T alpha_k, beta_k;
+    int k(0);
+    
+    while(dot(r_k, r_k)>tol*tol && k < maxiter - 1)
+    {
+        alpha_k = dot(r_k, r_k) / dot(A.matvec(p_k), p_k);
+        x_kP1 = x_k + alpha_k * p_k;
+        r_kP1 = r_k - alpha_k * A.matvec(p_k);
+        beta_k = dot(r_kP1, r_kP1) / dot(r_k, r_k);
+        p_kP1 = r_kP1 + beta_k * p_k;
+
+        // And now... the mess
+        x_k = x_kP1;
+        r_k = r_kP1;
+        p_k = p_kP1;
+        
+        // Would be possible to eliminate x_k, p_kP1
+//        alpha = dot(r_k, r_k) / dot(A.matvec(p_k), p_k);
+//        x = x + alpha * p;
+//        r_kP1 = r_k - alpha * A.matvec(p);
+//        beta = dot(r_kP1, r_kP1) / dot(r_k, r_k);
+//        p = r_kP1 + beta * p;
+//        r_k = r_kP1;
+        
+        k++;
+    }
+    
+    return (k < maxiter-1) ? k+1 : -1;
+    
+}
+
 
 int main()
 {

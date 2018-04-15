@@ -8,7 +8,7 @@ project (heatEquation)
 add_executable(heatEquation src/heatEquation.cxx)
 
 # Define C++11 standard
-set_property(TARGET heatEquation PROPERTY CXX_STANDARD 11)
+set_property(TARGET heatEquation PROPERTY CXX_STANDARD 14)
 
 # Add test called "heatEquation-test" based on the executable "heatEquation"
 add_test (heatEquation-test heatEquation)
