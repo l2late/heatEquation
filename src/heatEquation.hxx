@@ -1,223 +1,293 @@
-#include <stdio.h>
-#include <iostream>
-#include <initializer_list>
-#include <map>
-#include <array>
-#include <exception>
-#include <memory>
-#include <type_traits>
-#include <typeinfo>
+# include <initializer_list>
+# include <memory>
+# include <iostream>
+# include <type_traits>
+# include <exception>
+# include <map>
+# include <array>
+# include <math.h>
 
-using keytype = const std::array<int,2>;
+using keytype = const std::array<int,2>; //
 
 template<typename T>
-class Vector
-{
+class Vector {
 public:
-    //default constructor
-    Vector():
-    length(0), data(nullptr)
-    {}
+    Vector()
+    : data(nullptr), length(0) {}
     
-    //constructor
-    Vector(int length):
-    length(length), data(new T[length])
-    {}
+    Vector(int length)
+    : data(new T[length]), length(length) {}
     
-    //copy constructor
-    Vector(const Vector& v):
-    Vector(v.length)
+    Vector(const Vector<T>& vector)
+    : Vector(vector.length)
     {
-        for(auto i=0; i<v.length; i++)
-            data[i] = v.data[i];
+        for(int i = 0; i<length; i++)
+            data[i] = vector.data[i];
     }
     
-    //list constructor
-    Vector(std::initializer_list<T> list):
-    Vector((int)list.size())
+    Vector(std::initializer_list<T> list)
+    : Vector(list.size())
     {
         std::uninitialized_copy(list.begin(), list.end(), data);
     }
     
-    //Destructor
     ~Vector()
     {
-        delete[] data;
         length = 0;
+        data = nullptr;
+        delete[] data;
     }
     
-    
-    //copy assignment
-    Vector& operator=(const Vector& other)
-    {
-        if(this != &other)
-        {
-            delete[] data;
-            length = other.length;
-            data = new T[other.length];
-            for (auto i=0; i<other.length; i++)
-                data[i] = other[i];
-        }
-        return *this;
-    }
-    
-    //move assignment
-    Vector& operator=(Vector&& other)
-    {
-        if(this != &other)
-        {
-            delete[] data;
-            length = other.length;
-            data = other.data;
-            other.length = 0;
-            other.data = nullptr;
-            delete[] other.data;
-        }
-        return *this;
-    }
-    
-    Vector operator+(const Vector& other) const
-    {
-        if(length == other.length)
-        {
-            Vector<decltype(data[1] + other[1])> v(length);
-            for(auto i=0; i<length; i++)
-                v.data[i] = data[i] + other.data[i];
-            return v;
-        }
-        else
-        {
-            throw 0;
-        }
-    }
-    
-    Vector operator-(const Vector& other) const
-    {
-        if(length == other.length)
-        {
-            Vector<decltype(data[1] - other[1])> v(length);
-            for(auto i=0; i<length; i++)
-                v.data[i] = data[i] - other[i];
-            return v;
-        }
-        else
-        {
-            throw 0;
-        }
-    }
-    
-    T operator[](const int i) const
+    auto operator[](const int i) const
     {
         return data[i];
     }
     
-    T & operator[](const int i)
+    auto & operator[](const int i)
     {
         return data[i];
     }
     
-    // type deduction???
-    template<typename S>
-    Vector operator*=(const S& scalar) const
+    Vector<T> & operator=(const Vector<T>& other)
     {
-            Vector<decltype(data[1]*scalar)> v(length);
+        delete[] data;
+        length = other.size();
+        data = new T[other.length];
+        for(auto i = 0; i < other.length; i++)
+            data[i] = other[i];
+        return* this;
+    }
+    
+    Vector<T> operator=(Vector<T>&& other)
+    {
+        delete[] data;
+        length = other.size();
+        data = new T[other.size()];
+        for(auto i = 0; i < other.length; i++)
+            data[i] = other[i];
+        other.data = nullptr;
+        delete[] other.data;
+        other.length = 0;
+        return *this;
+    }
+    
+    // Not completely sure on the throw in this operation
+    template<typename U>
+    auto operator+(const Vector<U> &other) const
+    {
+        if(length != other.length)
+            throw "Vectors are of different size";
+        else {
+            Vector<decltype(data[1] + other[1])> newVector(length);
             for(auto i=0; i<length; i++)
-                v[i] = data[i] * scalar;
-            return v;
+                newVector[i] = data[i]+other[i];
+            return newVector;
+        }
+        
     }
     
-    // right multiplication as member function
-    template<typename S>
-    Vector operator*(const S& scalar) const
+    template<typename U>
+    auto operator-(const Vector<U> other) const
     {
-        return this *= scalar;
+        Vector<decltype(data[1] - other[1])> newVector(length);
+        for(auto i=0; i<length; i++)
+            newVector[i] = data[i]-other[i];
+        return newVector;
     }
     
+    template<typename S>
+    auto operator*(const S scalar) const
+    {
+        Vector<decltype(scalar*data[1])> newVector(length);
+        for(auto i=0; i<length; i++)
+            newVector[i] = scalar*data[i];
+        return newVector;
+    }
+    
+    int size() const
+    {
+        return length;
+    }
+
     void print()
     {
         std::cout << "Vector datatype: " << typeid(this->data[0]).name() << std::endl;
         for(auto i=0; i<this->length; i++)
-            std::cout << data[i] << ", ";
-    std::cout << std::endl;
+            std::cout << this->data[i] << ", ";
+        std::cout << std::endl;
     }
+
     
 private:
+    
+    T* data;
     int length;
-    T *data;
-
+    
 };
 
-//Vector left multiplication with scalar as non member function
-//The lhs Vector is a copy and not a reference.
-//This allows the compiler to make optimizations such as copy elision / move semantics.
+// Specialisation of the left multiplication with a scalar
 template<typename T, typename S>
-auto operator*(const S scalar, const Vector<T> rhs)
+auto operator*(const S scalar, const Vector<T> vector)
 {
-    Vector<decltype(scalar*rhs[0])> vec;
-    return rhs *= scalar;
-}
-
-// DOT product
-template<typename T>
-T dot(const Vector<T>& l, const Vector<T>& r)
-{
-    if(l.length == r.length)
-    {
-        T result = 0;
-        for(auto i=0; i,l.length; i++)
-            // type deduction???
-            result += l[i] * r[i];
-        
-        return result;
-    }
+    Vector<decltype(scalar*vector[1])> newVector(vector.size());
+    for(auto i=0; i<vector.size(); i++)
+        newVector[i] = scalar*vector[i];
+    return newVector;
 }
 
 template<typename T>
 class Matrix
 {
 public:
-    Matrix(int row, int col):
-    row(row), col(col)
+    Matrix(int rows, int columns)
+    : rows(rows), columns(columns)
     {
-        for(auto i=0; i<row; i++) {
-            for(auto j=0; j<col; j++) {
-                keytype index{{i,j}};
-                elem[index] = 0;
+        for(auto i=0; i<rows; i++)
+        {
+            for(auto j=0; j<columns; j++)
+            {
+                dataMap[{{i,j}}] = 0;
             }
         }
+    };
+    
+    ~Matrix()
+    {
+        
     }
     
-    template<typename V1, typename V2>
-    Vector<V1> matvec(const Vector<V2>& rhs) const
+    auto & operator [](const keytype key)
     {
-        if(rhs.length == col){
-            Vector<V1> vec(row);
-            for(auto i=0; i<row; i++){
-                for(auto j=0; j<col; j++){
-                    vec[i] += elem[{i,j}] * rhs[j];
-                    }
-                }
-            return vec;
-            }
+        return dataMap[key];
     }
     
     void print()
     {
-        auto it = this->elem.begin();
+        auto it = this->dataMap.begin();
         std::cout << "Matrix datatype: " << typeid((*it).second).name() << std::endl;
-        for(auto i=0; i<row; i++){
-            for(auto j=0; j<row; j++){
+        for(auto i=0; i<rows; i++){
+            for(auto j=0; j<columns; j++){
                 keytype index{{i,j}};
-                auto it = this->elem.at(index);
+                auto it = this->dataMap.at(index);
                 std::cout << it << ", ";
             }
             std::cout << std::endl;
         }
     }
     
+    // methods
+    auto matvec(const Vector<T> & vector)
+    {
+        if(columns != vector.size())
+            throw "Matrix and vector are not in the same space";
+        else
+        {
+            Vector<T> newVector(vector.size());
+            for(auto i=0; i<rows; i++)
+            {
+                newVector[i] = 0;
+                for(auto j=0; j<columns; j++)
+                {
+                    newVector[i] += dataMap[{{i,j}}]*vector[j];
+                }
+            }
+            return newVector;
+        }
+    }
     
 private:
-    const int row;
-    const int col;
-    std::map<keytype, T> elem;
+    int const rows;
+    int const columns;
+    std::map<keytype, T> dataMap;
 };
+
+class Heat1D
+{
+    Heat1D(const double alpha, const int m, const double dt)
+    : M(m-1,m-1)
+    {
+        double sumDkij;
+        double identity;
+        
+        for(int i=0; i<m; i++)
+        {
+            for(int j=0; j<m; j++)
+            {
+                if(i==j)
+                {
+                    sumDkij = -2;
+                    identity = 1;
+                }
+                if(abs(j-i)==1)
+                {
+                    sumDkij = 1;
+                    identity = 0;
+                }
+                else
+                {
+                    sumDkij = 0;
+                    identity = 0;
+                }
+                M[{{i,j}}] = identity + alpha*dt/pow((1/m+1),2)*sumDkij;
+            }
+        }
+    }
+    
+    // Methods
+    
+    Vector<double> exact(double t) const
+    {
+        
+    }
+    
+private:
+    Matrix<double> M;
+};
+
+// Functions
+
+// Why not return a common type?
+template<typename T>
+T dot(const Vector<T>& l, const Vector<T>& r)
+{
+    T dotproduct(0);
+    for(auto i=0; i<l.size(); i++)
+        dotproduct += l[i]*r[i];
+    return dotproduct;
+}
+
+// Conjugate Gradient Function
+template<typename T>
+int cg(const Matrix<T> &A, const Vector<T> &b, Vector<T> &x, T tol, int maxiter)
+{
+    Vector<T> p_k(b - A.matvec(x)), p_kP1, r_k(p_k), r_kP1, x_k(x), x_kP1; // Add a const before x? IDEA: maybe x is not put as a constant in the interface on purpose. Maybe we can change the value of x for each iteration. That way, we don't have to return x, as it just modifies the 'x_0' given to the function.
+    T alpha_k, beta_k;
+    int k(0);
+    
+    while(dot(r_k, r_k)>tol*tol && k < maxiter - 1)
+    {
+        alpha_k = dot(r_k, r_k) / dot(A.matvec(p_k), p_k);
+        x_kP1 = x_k + alpha_k * p_k;
+        r_kP1 = r_k - alpha_k * A.matvec(p_k);
+        beta_k = dot(r_kP1, r_kP1) / dot(r_k, r_k);
+        p_kP1 = r_kP1 + beta_k * p_k;
+        
+        // And now... the mess
+        x_k = x_kP1;
+        r_k = r_kP1;
+        p_k = p_kP1;
+        
+        // Would be possible to eliminate x_k, p_kP1
+        //        alpha = dot(r_k, r_k) / dot(A.matvec(p_k), p_k);
+        //        x = x + alpha * p;
+        //        r_kP1 = r_k - alpha * A.matvec(p);
+        //        beta = dot(r_kP1, r_kP1) / dot(r_k, r_k);
+        //        p = r_kP1 + beta * p;
+        //        r_k = r_kP1;
+        
+        k++;
+    }
+    
+    return (k < maxiter-1) ? k+1 : -1;
+    
+}
