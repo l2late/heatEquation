@@ -4,9 +4,9 @@
 template<typename T>
 int cg(const Matrix<T> &A, const Vector<T> &b, Vector<T> &x, T tol, int maxiter)
 {
-	Vector<T> r = b - A.matvec(x); p(r);
+	Vector<T> r = b - A.matvec(x), p(r);
 	T alpha, beta;
-
+    auto k = 0;
 		for (k = 0; k < maxiter; k++)
 		{
 			alpha = dot(r, r) / dot(A.matvec(p), p);
