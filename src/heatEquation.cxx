@@ -5,6 +5,7 @@
 # include <exception>
 # include <map>
 # include <array>
+# include <math.h>
 
 using keytype = const std::array<int,2>; //
 
@@ -129,9 +130,9 @@ private:
 template<typename T, typename S>
 auto operator*(const S scalar, const Vector<T> vector)
 {
-    Vector<decltype(scalar*vector.data[1])> newVector(vector.length);
-    for(auto i=0; i<vector.length; i++)
-        newVector.data[i] = scalar*vector.data[i];
+    Vector<decltype(scalar*vector[1])> newVector(vector.size());
+    for(auto i=0; i<vector.size(); i++)
+        newVector[i] = scalar*vector[i];
     return newVector;
 }
 
@@ -190,7 +191,38 @@ private:
 class Heat1D
 {
     Heat1D(const double alpha, const int m, const double dt)
-    : M(m,1)
+    : M(m-1,m-1)
+    {
+        double sumDkij;
+        double identity;
+        
+        for(int i=0; i<m; i++)
+        {
+            for(int j=0; j<m; j++)
+            {
+                if(i==j)
+                {
+                    sumDkij = -2;
+                    identity = 1;
+                }
+                if(abs(j-i)==1)
+                {
+                    sumDkij = 1;
+                    identity = 0;
+                }
+                else
+                {
+                    sumDkij = 0;
+                    identity = 0;
+                }
+                M[{{i,j}}] = identity + alpha*dt/pow((1/m+1),2)*sumDkij;
+            }
+        }
+    }
+    
+    // Methods
+    
+    Vector<double> exact(double t) const
     {
         
     }
@@ -254,6 +286,10 @@ int main()
     Vector<double> b = {1, 2};
     Vector<double> c = {1, 2};
     Vector<double> checkMove = {1, 2};
+    
+    Vector<double> t = 6*c;
+    
+    std::cout << t[0] << std::endl;
     
     b = std::move(checkMove);
     int dotCheck = dot(b,c);
