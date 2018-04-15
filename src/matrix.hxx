@@ -1,5 +1,7 @@
 #pragma once
 
+using keytype = std::array<int, 2>;
+
 template<typename T>
 class Matrix
 {
@@ -63,5 +65,5 @@ public:
 private:
     int const rows;
     int const columns;
-	std::map <std::array<int, 2>, T> data;
+	std::map <keytype, T> dataMap;
 };
