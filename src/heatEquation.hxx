@@ -289,34 +289,77 @@ public:
         }
         
         for(int i = 0; i<m; i++)
-            w[i] = sin(pi*(i/(m+i)));
+            wStart[i] = sin(pi*(i/(m+i)));
     }
     
     // Methods
     
     Vector<double> exact(double t) const
     {
-        return exp(-pow(pi,2)*alpha*t)*w;
+        return exp(-pow(pi,2)*alpha*t)*wStart;
     }
     
     Vector<double> solve(double t_end) const
     {
-        Vector<double> w_new(w);
-        Vector<double> w_min(w);
+        Vector<double> w(wStart); // Initialize w with w at t=0
+        int iterations;
         
         for(auto t = 0; t<t_end ; t += dt)
         {
-            cg(M, w_min, w_new, 0.01, 50);
-            w_min = (w_new);
+            iterations = cg(M, w, w, 0.0001, 50);
         }
+        if (iterations==-1) throw "Maximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
         
-        return w_new;
+        return w;
     }
 private:
     Matrix<double> M;
     int const m;
     double const alpha;
     double const dt;
-    Vector<double> w;
+    Vector<double> wStart;
     
+};
+
+class Heat2D {
+    Heat1D(const double alpha, const int m, const double dt)
+    : M(m,m), m(m), alpha(alpha), dt(dt)
+    {
+        Matrix<double> D(m,m);
+        for(int i=0; i<m; i++)
+        {
+            M[{{i,i}}] = 1;
+            D[{{i,i}}] = -2;
+            
+            // First Dimension
+            int j = i+pow(m,0)
+            
+            if (floor(double(j)/(double)m) == floor(double(i)/(double)m))
+            {
+                D[{{i,j}] = 1;
+                D[{{j,i}}] = 1;
+            }
+            
+            // Second Dimension
+            j = i + pow(m,1)
+            
+            if (j < pow(m,n))
+            {
+                D[{{i,j}] = 1;
+                D[{{j,i}}] = 1;
+            }
+    
+        M[{{i,j}}] = M[{{i,j}}] + alpha*dt/pow((1/m+1),2)*D[{{i,j}}];
+        M[{{j,i}}] = M[{{i,j}}] + alpha*dt/pow((1/m+1),2)*D[{{i,j}}];
+                
+        
+        }
+        
+        for(int i = 0; i<m; i++) {
+            for(int j = 0; j<m; j++)
+                wStart[i+j*m] = sin(pi*(i/(m+1)))*sin(pi*(j/(m+1)));
+        }
+
+        
+    }
 };
