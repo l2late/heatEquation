@@ -56,20 +56,24 @@ class Heat2D
             double dx = 1/(m+1);
             
             for(int i = 0; i<m*m; i++){
-                M[{{i,i}}] = 1 -alpha*dt/dx*dx*-2*2;
-            
+              
                 if((i+1)/m == i/m){
                     M[{{i,i+1}}] =  -alpha*dt/dx*dx*1;
                     M[{{i+1,i}}] =  M[{{i,i+1}}];
                 }
                 
+                M[{{i,i}}] = 1 -alpha*dt/dx*dx*-2*2;
+                
                 if(i+m < m*m){
                     M[{{i,i+m}}] =  -alpha*dt/0.0625*1;
                     M[{{i+m,i}}] =  M[{{i,i+1}}];
                 }
-        }
+            }
             
-            
+            for(int i = 0; i<m; i++) {
+                for(int j = 0; j<m; j++)
+                    wStart[i+j*m] = sin(pi*(i/(m+1)))*sin(pi*(j/(m+1)));
+            }
 		}
 
 		// Methods
