@@ -32,12 +32,12 @@ int main(){
 
 // Check if Heat1D is working (attributes are put on public)
     double alpha = 0.3125;
-    double dt = 0.1;
-    int m = 3;
+    double dt = 0.001;
+    int m = 10;
 
     std::cout << "1D M Matrix with test values: " << std::endl;
     Heat1D MatrixCheck1D(alpha, m, dt);
-    MatrixCheck1D.M.print();
+//    MatrixCheck1D.M.print();
     
 // Check if the solve and exact functions return the same values for 1D
     Vector<double> exactCheck1D = MatrixCheck1D.exact(0.1);

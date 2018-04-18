@@ -20,13 +20,13 @@ public:
         }
         
 		for (int i = 0; i<m; i++)
-			wStart[i] = sin(pi*i*dx);
+			wStart[i] = sin(pi*(i+1)*dx);
 	}
 
 	// Methods
 	Vector<double> exact(double t) const
 	{
-		return exp(-pow(pi,2)*alpha*t)*wStart;
+        return exp(-pow(pi,2)*alpha*t)*wStart;
 	}
 
 	Vector<double> solve(double t_end) const
@@ -36,7 +36,7 @@ public:
 
 		for (double t = 0; t<t_end; t = t + dt)
 		{
-			iterations = cg(M, w, w, 0.001, 50);
+			iterations = cg(M, w, w, 0.00001, 50);
             if (iterations == -1) throw "\nMaximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
 		}
 
