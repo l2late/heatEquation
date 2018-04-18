@@ -151,7 +151,7 @@ class Heat
 {
     public:
         Heat(const double alpha, const int m, const double dt)
-            : M(pow(m, n), pow(m, n)), m(m), alpha(alpha), dt(dt)
+            : M(pow(m, n), pow(m, n)), m(m), alpha(alpha), dt(dt), wStart(pow(m,n))
         {
             double dx = 1/(static_cast<double>(m)+1);
 
@@ -162,24 +162,35 @@ class Heat
                     if (i==j)
                         M[{ {i, j}}] = 1-alpha*dt / dx*dx * -2*n;
                     else
-                        M[{ {i, j}}] = -alpha*dt / dx*dx * Neighbor<n>(i, j, m);
+                        M[{ {i, j}}] = -alpha*dt / dx*dx * Neighbor<n>(i, j,m)::value;
                 }
             }
             
-            // This is still for 2D
-            for(int i = 0; i<m; i++) {
-                for(int j = 0; j<m; j++)
-                    wStart[i+j*m] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx);
+            
+            // Build initial temperature distribution
+            if(n == 1){
+                for (int i = 0; i<m; i++)
+                    wStart[i] = sin(pi*(i+1)*dx);
             }
             
+            if(n == 2){
+                // This is still for 2D
+                for(int i = 0; i<m; i++) {
+                    for(int j = 0; j<m; j++)
+                        wStart[i+j*m] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx);
+                }
+            }
+            
+            if(n == 3){
             // 3D
-            for(int i = 0; i<m; i++) {
-                for(int j = 0; j<m; j++)
-                    for(int k = 0; k<m; k++)
-                        wStart[i+j*m+k*pow(m,2)] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx)*sin(pi*(k+1)*dx);
+                for(int i = 0; i<m; i++) {
+                    for(int j = 0; j<m; j++)
+                        for(int k = 0; k<m; k++)
+                            wStart[i+j*m+k*pow(m,2)] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx)*sin(pi*(k+1)*dx);
+                }
             }
             
-            
+            if(n > 3) throw "Dimension is too high";
             
         }
 

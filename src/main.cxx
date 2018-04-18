@@ -32,12 +32,13 @@ int main(){
 
 // Check if Heat1D is working (attributes are put on public)
     double alpha = 0.3125;
-    double dt = 0.001;
-    int m = 10;
+    double dt = 0.1;
+    int m = 3;
+    int const n = 1;
 
     std::cout << "1D M Matrix with test values: " << std::endl;
-    Heat1D MatrixCheck1D(alpha, m, dt);
-//    MatrixCheck1D.M.print();
+    Heat<n> MatrixCheck1D(alpha, m, dt);
+    MatrixCheck1D.M.print();
     
 // Check if the solve and exact functions return the same values for 1D
     Vector<double> exactCheck1D = MatrixCheck1D.exact(0.1);
@@ -59,20 +60,21 @@ int main(){
     Heat2D MatrixCheck2D(alpha, m, dt);
     MatrixCheck2D.M.print();
 
-    // Check if the solve and exact functions return the same values for 1D
+    // Check if the solve and exact functions return the same values for 2D
     Vector<double> exactCheck2D = MatrixCheck2D.exact(1);
     
-    std::cout << "\n1D Matrix with test values, exact at t = 1: " << std::endl;
+    std::cout << "\n2D Matrix with test values, exact at t = 1: " << std::endl;
     exactCheck2D.print();
     
     try {
         Vector<double> solveCheck2D = MatrixCheck2D.solve(1);
-        std::cout << "\n1D Matrix with test values, solve at t = 1: " << std::endl;
+        std::cout << "\n2D Matrix with test values, solve at t = 1: " << std::endl;
         solveCheck2D.print();
     } catch (const char* msg)
     {
         std::cerr << msg << std::endl;
     }
     
+    std::cout << " ------------------------------- " << std::endl;
     return 0;
 }
