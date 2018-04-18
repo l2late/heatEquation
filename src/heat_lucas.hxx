@@ -13,8 +13,10 @@ public:
         
         for(int i = 0; i < m; i++) {
             M[{{i,i}}] = 1 -alpha*dt/(pow(dx,2))*-2;
-            M[{{i,i+1}}] =  -alpha*dt/(pow(dx,2));
-            M[{{i+1,i}}] =  M[{{i,i+1}}];
+            if(i<m-1){
+                M[{{i,i+1}}] =  -alpha*dt/(pow(dx,2));
+                M[{{i+1,i}}] =  M[{{i,i+1}}];
+            }
         }
         
 		for (int i = 0; i<m; i++)
@@ -32,9 +34,9 @@ public:
 		Vector<double> w(wStart); // Initialize w with w at t=0
 		int iterations;
 
-		for (auto t = 0; t<t_end; t += dt)
+		for (double t = 0; t<t_end; t = t + dt)
 		{
-			iterations = cg(M, w, w, 0.1, 50);
+			iterations = cg(M, w, w, 0.001, 50);
             if (iterations == -1) throw "\nMaximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
 		}
 

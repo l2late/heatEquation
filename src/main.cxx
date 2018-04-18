@@ -46,15 +46,15 @@ int main(){
     exactCheck1D.print();
     
     try {
-        Vector<double> solveCheck1D = MatrixCheck1D.solve(0.1);
-        std::cout << "/n1D Matrix with test values, solve at t = 1: " << std::endl;
+        Vector<double> solveCheck1D = MatrixCheck1D.solve(1);
+        std::cout << "\n1D Matrix with test values, solve at t = 1: " << std::endl;
         solveCheck1D.print();
     } catch (const char* msg)
     {
         std::cerr << msg << std::endl;
     }
     
-//    std::cout << "2D M Matrix with test values: " << std::endl;
+//    std::cout << "\n2D M Matrix with test values: " << std::endl;
 //    Heat2D MatrixCheck2D(alpha, m, dt);
 //    MatrixCheck2D.M.print();
     
