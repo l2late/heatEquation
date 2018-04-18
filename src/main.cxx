@@ -40,13 +40,13 @@ int main(){
     MatrixCheck1D.M.print();
     
 // Check if the solve and exact functions return the same values for 1D
-    Vector<double> exactCheck1D = MatrixCheck1D.exact(1);
+    Vector<double> exactCheck1D = MatrixCheck1D.exact(0.1);
 
     std::cout << "\n1D Matrix with test values, exact at t = 1: " << std::endl;
     exactCheck1D.print();
     
     try {
-        Vector<double> solveCheck1D = MatrixCheck1D.solve(1);
+        Vector<double> solveCheck1D = MatrixCheck1D.solve(0.1);
         std::cout << "\n1D Matrix with test values, solve at t = 1: " << std::endl;
         solveCheck1D.print();
     } catch (const char* msg)

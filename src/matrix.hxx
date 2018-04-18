@@ -31,12 +31,12 @@ public:
     void print()
     {
         auto it = dataMap.begin();
-        std::printf("\nMatrix datatype: %s \n", typeid((*it).second).name());
-        std::printf("Matrix size: %ux%u \n", rows,columns);
-        std::printf("DataMap size: %u \n", dataMap.size());
+        std::printf("Matrix datatype: %s\n", typeid((*it).second).name());
+        std::printf("Matrix size: %ux%u\n", rows,columns);
+        std::printf("DataMap size: %u\n", dataMap.size());
         auto iter = 1;
         for (auto& x: dataMap) {
-            std::printf("% 4.2f , ", x.second);
+            std::printf("% 6.4f , ", x.second);
             if (iter!=1 & iter % rows == 0) // next line after end of row
                 std::printf("\n");
             iter++;
