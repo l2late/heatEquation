@@ -32,11 +32,11 @@ public:
     {
         auto it = this->dataMap.begin();
         std::cout << "Matrix datatype: " << typeid((*it).second).name() << std::endl;
-        auto iter = 0;
+        auto iter = 1;
         for (auto& x: this->dataMap) {
-            std::cout << x.second << ", ";
-            if (iter!=0 & iter/this->rows == 0)
-                std::cout << std::endl;
+            std::cout << printf("% 4.2f", x.second) << ", ";
+            if (iter!=1 & iter % this->rows == 0) // next line after end of row
+                std::cout << "\n";
             iter++;
         }
         std::cout << std::endl;

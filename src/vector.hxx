@@ -103,7 +103,7 @@ public:
     {
         std::cout << "Vector datatype: " << typeid(this->data[0]).name() << std::endl;
         for(auto i=0; i<this->length; i++)
-            std::cout << this->data[i] << ", ";
+            std::cout << printf("% 4.2f", this->data[i]) << ", ";
         std::cout << std::endl;
     }
 
