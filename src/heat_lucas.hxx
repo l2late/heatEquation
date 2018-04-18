@@ -12,19 +12,19 @@ public:
         double dx = 1/( static_cast<double>(m) +1 );
         
         for(int i = 0; i < m; i++) {
-            M[{{i,i}}] = 1 -alpha*dt/(dx*dx)*-2;
-            M[{{i,i+1}}] =  -alpha*dt/(dx*dx);
+            M[{{i,i}}] = 1 -alpha*dt/(pow(dx,2))*-2;
+            M[{{i,i+1}}] =  -alpha*dt/(pow(dx,2));
             M[{{i+1,i}}] =  M[{{i,i+1}}];
         }
         
 		for (int i = 0; i<m; i++)
-			wStart[i] = sin(pi*(i / (m + i)));
+			wStart[i] = sin(pi*i*dx);
 	}
 
 	// Methods
 	Vector<double> exact(double t) const
 	{
-		return exp(-pi*pi*alpha*t)*wStart; // POW does not work here, does exp do??
+		return exp(-pow(pi,2)*alpha*t)*wStart;
 	}
 
 	Vector<double> solve(double t_end) const
@@ -34,9 +34,9 @@ public:
 
 		for (auto t = 0; t<t_end; t += dt)
 		{
-			iterations = cg(M, w, w, 0.0001, 50);
+			iterations = cg(M, w, w, 0.1, 50);
+            if (iterations == -1) throw "\nMaximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
 		}
-		if (iterations == -1) throw "Maximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
 
 		return w;
 	}
