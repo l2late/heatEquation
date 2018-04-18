@@ -12,7 +12,7 @@
 #include "vector.hxx"
 #include "matrix.hxx"
 #include "cg.hxx"
-#include "heat.hxx"
+#include "heat_lucas.hxx"
 
 
 int main(){
@@ -21,13 +21,12 @@ int main(){
     Vector<double> c = {1, 2};
     Vector<double> checkMove = {1, 2};
     
+    int powCheck = pow(2,3);
+    
+    std::cout << "2 to the power 3: " << powCheck << std::endl;
+    
     Vector<double> t = 6*c;
     t.print();
-    
-    b = std::move(checkMove);
-    int dotCheck = dot(b,c);
-    
-    std::cout << dotCheck << std::endl;
     
     // See if we can construct the matrix.
     Matrix<double> M(2,2);
@@ -35,10 +34,6 @@ int main(){
     M[{{0,1}}] = 0;
     M[{{1,0}}] = 0;
     M[{{1,1}}] = 1;
-    
-    
-    // Add entries as:
-    // M[{0,0}] = 1.0;
     
     M.print();
     
@@ -49,12 +44,12 @@ int main(){
     double dt = 0.1;
     int m = 3;
     
+    std::cout << "1D M Matrix with test values: " << std::endl;
     Heat1D MatrixCheck1D(alpha, m, dt);
-    
     MatrixCheck1D.M.print();
     
+    std::cout << "2D M Matrix with test values: " << std::endl;
     Heat2D MatrixCheck2D(alpha, m, dt);
-    
     MatrixCheck2D.M.print();
     
     return 0;
