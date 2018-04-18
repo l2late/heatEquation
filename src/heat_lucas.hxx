@@ -111,89 +111,102 @@ class Heat2D
 		Vector<double> wStart;
 };
 
-//template<int n>
-//class Neighbor
-//{
-//    public:
-//        double value;
-//        int i;
-//        int j;
-//
-//    Neighbor(int i, int j)
-//        : value(Neighbor<n-1>::value), i(i),j(j)
-//    {
-//    if (j / pow(m, n) == i / pow(m, n)
-//        value += 1;
-//};
-//
-//template<>
-//class Neighbor<1>
-//{
-//public:
-//    double value;
-//    int i;
-//    int j;
-//
-//Neighbor(int i,int j)
-//    : value(0), i(i),j(j)
-//    {
-//        if (j/ m == i/m)
-//            value += 1;
-//    }
-//};
-//
-//
-//template<int n>
-//class Heat
-//{
-//    public:
-//        Heat(const double alpha, const int m, const double dt)
-//            : M(pow(m, n), pow(m, n)), m(m), alpha(alpha), dt(dt)
-//        {
-//            double dx = 1/(m+1);
-//
-//            for(int i = 0; i<pow(m,n); i++)
-//            {
-//                for (int j = 0; j < pow(m, n); j++)
-//                {
-//                    if (i==j)
-//                        M[{ {i, j}}] = 1-alpha*dt / dx*dx * -2*n;
-//                    else
-//                        M[{ {i, j}}] = -alpha*dt / dx*dx * Neighbor<n>(i, j);
-//                }
-//            }
-//        }
-//
-//        // Methods
-//        Vector<double> exact(double t) const
-//        {
-//            return exp(-pow(pi, 2)*alpha*t*n)*wStart;
-//        }
-//
-//        Vector<double> solve(double t_end) const
-//        {
-//            Vector<double> w(wStart); // Initialize w with w at t=0
-//            int iterations;
-//
-//            for (auto t = 0; t<t_end; t += dt)
-//            {
-//                iterations = cg(M, w, w, 0.0001, 50);
-//            }
-//            if (iterations == -1) throw "Maximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
-//
-//            return w;
-//        }
-//
-//
-//    Matrix<double> M;
-//    int const m;
-//    double const alpha;
-//    double const dt;
-//    Vector<double> wStart;
-//};
-//
-//
-//
-//
-//};
+template<int n>
+class Neighbor
+{
+    public:
+        double value;
+        int i;
+        int j;
+        int m;
+    
+    Neighbor(int i, int j)
+        : value(Neighbor<n-1>::value), i(i),j(j)
+    {
+        if (j / pow(m, n) == i / pow(m, n))
+            value += 1;
+    }
+};
 
+template<>
+class Neighbor<1>
+{
+public:
+    double value;
+    int i;
+    int j;
+    int m; // Could remove i, j and m
+
+Neighbor(int i,int j, int m)
+    : value(0), i(i),j(j)
+    {
+        if (j/ m == i/m)
+            value += 1;
+    }
+};
+
+
+template<int n>
+class Heat
+{
+    public:
+        Heat(const double alpha, const int m, const double dt)
+            : M(pow(m, n), pow(m, n)), m(m), alpha(alpha), dt(dt)
+        {
+            double dx = 1/(static_cast<double>(m)+1);
+
+            for(int i = 0; i<pow(m,n); i++)
+            {
+                for (int j = 0; j < pow(m, n); j++)
+                {
+                    if (i==j)
+                        M[{ {i, j}}] = 1-alpha*dt / dx*dx * -2*n;
+                    else
+                        M[{ {i, j}}] = -alpha*dt / dx*dx * Neighbor<n>(i, j, m);
+                }
+            }
+            
+            // This is still for 2D
+            for(int i = 0; i<m; i++) {
+                for(int j = 0; j<m; j++)
+                    wStart[i+j*m] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx);
+            }
+            
+            // 3D
+            for(int i = 0; i<m; i++) {
+                for(int j = 0; j<m; j++)
+                    for(int k = 0; k<m; k++)
+                        wStart[i+j*m+k*pow(m,2)] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx)*sin(pi*(k+1)*dx);
+            }
+            
+            
+            
+        }
+
+        // Methods
+        Vector<double> exact(double t) const
+        {
+            return exp(-pow(pi, 2)*alpha*t*n)*wStart;
+        }
+
+        Vector<double> solve(double t_end) const
+        {
+            Vector<double> w(wStart); // Initialize w with w at t=0
+            int iterations;
+
+            for (auto t = 0; t<t_end; t += dt)
+            {
+                iterations = cg(M, w, w, 0.0001, 50);
+            }
+            if (iterations == -1) throw "Maximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
+
+            return w;
+        }
+
+
+    Matrix<double> M;
+    int const m;
+    double const alpha;
+    double const dt;
+    Vector<double> wStart;
+};
