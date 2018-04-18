@@ -54,9 +54,25 @@ int main(){
         std::cerr << msg << std::endl;
     }
     
-//    std::cout << "\n2D M Matrix with test values: " << std::endl;
-//    Heat2D MatrixCheck2D(alpha, m, dt);
-//    MatrixCheck2D.M.print();
+    std::cout << " ------------------------------- " << std::endl;
+    std::cout << "\n2D M Matrix with test values: " << std::endl;
+    Heat2D MatrixCheck2D(alpha, m, dt);
+    MatrixCheck2D.M.print();
+
+    // Check if the solve and exact functions return the same values for 1D
+    Vector<double> exactCheck2D = MatrixCheck2D.exact(1);
+    
+    std::cout << "\n1D Matrix with test values, exact at t = 1: " << std::endl;
+    exactCheck2D.print();
+    
+    try {
+        Vector<double> solveCheck2D = MatrixCheck2D.solve(1);
+        std::cout << "\n1D Matrix with test values, solve at t = 1: " << std::endl;
+        solveCheck2D.print();
+    } catch (const char* msg)
+    {
+        std::cerr << msg << std::endl;
+    }
     
     return 0;
 }

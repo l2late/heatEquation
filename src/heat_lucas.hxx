@@ -56,7 +56,7 @@ class Heat2D
 {
 	public:
 		Heat2D(const double alpha, const int m, const double dt)
-			: M(m*m, m*m), m(m), alpha(alpha), dt(dt)
+			: M(m*m, m*m), m(m), alpha(alpha), dt(dt), wStart(m*m)
 		{
             double dx = 1/(static_cast<double>(m)+1);
             
@@ -73,9 +73,14 @@ class Heat2D
                 if(i+m < m*m)
 				{
                     M[{{i,i+m}}] =  -alpha*dt/(dx*dx)*1;
-                    M[{{i+m,i}}] =  M[{{i,i+1}}];
+                    M[{{i+m,i}}] =  M[{{i,i+m}}];
                 }
-			}                      
+			}
+            
+            for(int i = 0; i<m; i++) {
+                for(int j = 0; j<m; j++)
+                    wStart[i+j*m] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx);
+            }
 		}
 
 		// Methods
@@ -89,9 +94,9 @@ class Heat2D
 			Vector<double> w(wStart); // Initialize w with w at t=0
 			int iterations;
 
-			for (auto t = 0; t<t_end; t += dt)
+			for (double t = 0; t<t_end; t += dt)
 			{
-				iterations = cg(M, w, w, 0.0001, 50);
+				iterations = cg(M, w, w, 0.00001, 50);
 			}
 			if (iterations == -1) throw "Maximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
 
