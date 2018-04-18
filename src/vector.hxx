@@ -101,10 +101,10 @@ public:
 
     void print()
     {
-        std::cout << "Vector datatype: " << typeid(this->data[0]).name() << std::endl;
-        for(auto i=0; i<this->length; i++)
-            std::cout << printf("% 4.2f", this->data[i]) << ", ";
-        std::cout << std::endl;
+        std::printf("\nVector datatype: %s \n", typeid(data[0]).name());
+        for(auto i=0; i<length; i++)
+            std::printf("% 4.2f, ", data[i]);
+        std::printf("\n");
     }
 
     

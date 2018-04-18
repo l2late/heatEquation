@@ -30,16 +30,18 @@ public:
     
     void print()
     {
-        auto it = this->dataMap.begin();
-        std::cout << "Matrix datatype: " << typeid((*it).second).name() << std::endl;
+        auto it = dataMap.begin();
+        std::printf("\nMatrix datatype: %s \n", typeid((*it).second).name());
+        std::printf("Matrix size: %ux%u \n", rows,columns);
+        std::printf("DataMap size: %u \n", dataMap.size());
         auto iter = 1;
-        for (auto& x: this->dataMap) {
-            std::cout << printf("% 4.2f", x.second) << ", ";
-            if (iter!=1 & iter % this->rows == 0) // next line after end of row
-                std::cout << "\n";
+        for (auto& x: dataMap) {
+            std::printf("% 4.2f , ", x.second);
+            if (iter!=1 & iter % rows == 0) // next line after end of row
+                std::printf("\n");
             iter++;
         }
-        std::cout << std::endl;
+        std::printf("\n");
     }
     
     // methods

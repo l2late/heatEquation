@@ -7,6 +7,7 @@
 #include <array>
 #include <math.h>
 #include <cmath>
+#include <stdio.h>
 
 // Home made headers
 #include "vector.hxx"
