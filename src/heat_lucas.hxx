@@ -121,12 +121,17 @@ class Heat
         {
             double dx = 1/(static_cast<double>(m)+1);
 
+<<<<<<< HEAD
 			for (int i = 0; i < pow(m, n); i++)
+=======
+            for (int i = 0; i < pow(m, n); i++)
+>>>>>>> 239389b71431e7a306bfe0bc90b9a8c50db20644
 			{
 				M[{ {i, i}}] = 1 - alpha*dt / (dx*dx) * -2 * n;
 				
 				for (int j = 0; j < n; j++)
 				{
+<<<<<<< HEAD
 					int a = i / pow(m, j+1);
 					int b = (i + pow(m, j)) / pow(m, j+1);
 					int c = (i - pow(m, j)) / pow(m, j+1);
@@ -142,6 +147,13 @@ class Heat
 
 					if (a == c && e > -1)
 						M[{ {i, e}}] = - alpha*dt / (dx*dx);
+=======
+					if (i / pow(m, j) == (i + m) / pow(m, j))
+						M[{ {i, i+m}}] = 1 - alpha*dt / (dx*dx) * 1 * n;
+						
+					if (i / pow(m, j) == (i - m) / pow(m, j))
+						M[{ {i, i-m}}] = 1 - alpha*dt / (dx*dx) * 1 * n;
+>>>>>>> 239389b71431e7a306bfe0bc90b9a8c50db20644
 
 				}
 			}         
