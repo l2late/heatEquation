@@ -33,7 +33,7 @@ public:
         auto it = dataMap.begin();
         std::printf("Matrix datatype: %s\n", typeid((*it).second).name());
         std::printf("Matrix size: %ux%u\n", rows,columns);
-        std::printf("DataMap size: %u\n", dataMap.size());
+        std::printf("DataMap size: %lu\n", dataMap.size());
         auto iter = 1;
         for (auto& x: dataMap) {
             std::printf("% 6.4f , ", x.second);
