@@ -121,23 +121,34 @@ class Heat
         {
             double dx = 1/(static_cast<double>(m)+1);
 
-			for (int i = 0 i < pow(m, n); i++)
+			for (int i = 0; i < pow(m, n); i++)
 			{
 				M[{ {i, i}}] = 1 - alpha*dt / (dx*dx) * -2 * n;
 				
-				for (int j = 1; j < n + 1; j++)
+				for (int j = 0; j < n; j++)
 				{
-					if (i / pow(m, j) = (i + m) / pow(m, j)
-						M[{ {i, i+m}}] = 1 - alpha*dt / (dx*dx) * 1 * n;
-						
-					if (i / pow(m, j) = (i - m) / pow(m, j)
-						M[{ {i, i-m}}] = 1 - alpha*dt / (dx*dx) * 1 * n;
+					int a = i / pow(m, j+1);
+					int b = (i + pow(m, j)) / pow(m, j+1);
+					int c = (i - pow(m, j)) / pow(m, j+1);
+					int d = i + pow(m, j);
+					int e = i - pow(m, j);
+
+					std::cout << "i value = "<<  a << ", left value ="<< c << ", right neigh value =" << b << std::endl;
+					std::cout << "d =  " << d << ",  e =" << e << ", n = "<< n <<std::endl;
+
+					if (a == b && d < pow(m,n))
+						M[{ {i, d}}] = - alpha*dt / (dx*dx);
+					
+
+					if (a == c && e > -1)
+						M[{ {i, e}}] = - alpha*dt / (dx*dx);
 
 				}
 			}         
             
             // Build initial temperature distribution
             if(n == 1){
+
                 for (int i = 0; i<m; i++)
                     wStart[i] = sin(pi*(i+1)*dx);
             }
