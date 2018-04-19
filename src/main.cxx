@@ -37,10 +37,16 @@ int main(){
     int m = 3;
     int const n = 1;
 
-	std::cout << "1D M Matrix with test values: " << std::endl;
-    Heat<n> MatrixCheck1D(alpha, m, dt);
+	std::cout << "1D Heat equation: M Matrix with test values: " << std::endl;
+	
+    Heat1D MatrixCheck1D(alpha, m, dt);
     MatrixCheck1D.M.print();
-    
+	
+	std::cout << "ND Heat equation for 1 dimension: M Matrix with test values: " << std::endl;
+	Heat<n> MatrixCheckN1D(alpha, m, dt);
+	MatrixCheckN1D.M.print();
+
+
 // Check if the solve and exact functions return the same values for 1D
    // Vector<double> exactCheck1D = MatrixCheck1D.exact(0.1);
 
@@ -61,6 +67,13 @@ int main(){
     Heat2D MatrixCheck2D(alpha, m, dt);
     MatrixCheck2D.M.print();
 
+	static const int z = 4;
+	Heat<z> MatrixCheckN2D(alpha, m, dt);
+	//MatrixCheckN2D.M.print();
+
+	Vector<double> solveCheck2D = MatrixCheck2D.solve(1);
+
+	/*
     // Check if the solve and exact functions return the same values for 2D
     Vector<double> exactCheck2D = MatrixCheck2D.exact(1);
     
@@ -75,7 +88,7 @@ int main(){
     {
         std::cerr << msg << std::endl;
     }
-    
+    */
     std::cout << " ------------------------------- " << std::endl;
 	std::getchar();
     return 0;

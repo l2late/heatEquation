@@ -112,6 +112,31 @@ class Heat2D
 };
 
 
+
+
+
+template<int n>
+double CalculateWStart(int i, int m, double dx)
+{
+	int index = (int)(i / pow(m, n - 1));
+	double j = i - (int)(index *pow(m, n - 1));
+	
+//	std::cout << "calculating the " << index + 1 << "th index in the dimension: " << n << std::endl;
+	//std::cout << "index in layer below =  " << j << std::endl;
+	return sin(pi*(index + 1)*dx)*CalculateWStart<n - 1>(j, m, dx);
+};
+
+
+template<>
+double CalculateWStart<1>(int i, int m, double dx)
+{
+	// std::cout << "calculating the " << i+1  << "th index in the dimension: " << 1 << std::endl;
+	return sin(pi*(i + 1)*dx);
+};
+
+
+
+
 template<int n>
 class Heat
 {
@@ -121,60 +146,27 @@ class Heat
         {
             double dx = 1/(static_cast<double>(m)+1);
 
-
 			for (int i = 0; i < pow(m, n); i++)
 			{
 				M[{ {i, i}}] = 1 - alpha*dt / (dx*dx) * -2 * n;
 				
 				for (int j = 0; j < n; j++)
 				{
+					if ((int)(i / pow(m, j + 1)) == (int)((i + pow(m, j)) / pow(m, j + 1)) && (int)(i + pow(m, j)) < pow(m,n))
+						M[{{i, (int)(i + pow(m, j))}}] = - alpha*dt / (dx*dx);	
 
-					int a = i / pow(m, j+1);
-					int b = (i + pow(m, j)) / pow(m, j+1);
-					int c = (i - pow(m, j)) / pow(m, j+1);
-					int d = i + pow(m, j);
-					int e = i - pow(m, j);
-
-					std::cout << "i value = "<<  a << ", left value ="<< c << ", right neigh value =" << b << std::endl;
-					std::cout << "d =  " << d << ",  e =" << e << ", n = "<< n <<std::endl;
-
-					if (a == b && d < pow(m,n))
-						M[{ {i, d}}] = - alpha*dt / (dx*dx);
-					
-
-					if (a == c && e > -1)
-						M[{ {i, e}}] = - alpha*dt / (dx*dx);
-
+					if ((int)(i / pow(m, j + 1)) == (int)((i - pow(m, j)) / pow(m, j + 1)) && (int)(i - pow(m, j)) > -1)
+						M[{{i, (int)(i - pow(m, j))}}] = - alpha*dt / (dx*dx);
 
 				}
-			}         
+			}                     
             
-            // Build initial temperature distribution
-            if(n == 1){
-
-                for (int i = 0; i<m; i++)
-                    wStart[i] = sin(pi*(i+1)*dx);
-            }
-            
-            if(n == 2){
-                // This is still for 2D
-                for(int i = 0; i<m; i++) {
-                    for(int j = 0; j<m; j++)
-                        wStart[i+j*m] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx);
-                }
-            }
-            
-            if(n == 3){
-            // 3D
-                for(int i = 0; i<m; i++) {
-                    for(int j = 0; j<m; j++)
-                        for(int k = 0; k<m; k++)
-                            wStart[i+j*m+k*pow(m,2)] = sin(pi*(i+1)*dx)*sin(pi*(j+1)*dx)*sin(pi*(k+1)*dx);
-                }
-            }
-            
-            if(n > 3) throw "Dimension is too high";
-            
+			// Build initial temperature distribution
+			for (int i = 0; i < pow(m, n); i++) 
+			{
+					wStart[i] = CalculateWStart<n>(i, m, dx);	
+			}
+			
         }
 
         // Methods
@@ -196,7 +188,6 @@ class Heat
 
             return w;
         }
-
 
     Matrix<double> M;
     int const m;
