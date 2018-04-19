@@ -1,6 +1,6 @@
 #pragma once
 #include <cmath>
-#include <tuple>
+
 const double pi = 3.14159265358979323846;
 
 class Heat1D
@@ -111,40 +111,6 @@ class Heat2D
 		Vector<double> wStart;
 };
 
-template<int n>
-class Neighbor
-{
-    public:
-        double value;
-        int i;
-        int j;
-        int m;
-    
-    Neighbor(int i, int j)
-        : value(Neighbor<n-1>::value), i(i),j(j)
-    {
-        if (j / pow(m, n) == i / pow(m, n))
-            value += 1;
-    }
-};
-
-template<>
-class Neighbor<1>
-{
-public:
-    double value;
-    int i;
-    int j;
-    int m; // Could remove i, j and m
-
-Neighbor(int i,int j, int m)
-    : value(0), i(i),j(j)
-    {
-        if (j/ m == i/m)
-            value += 1;
-    }
-};
-
 
 template<int n>
 class Heat
@@ -155,17 +121,20 @@ class Heat
         {
             double dx = 1/(static_cast<double>(m)+1);
 
-            for(int i = 0; i<pow(m,n); i++)
-            {
-                for (int j = 0; j < pow(m, n); j++)
-                {
-                    if (i==j)
-                        M[{ {i, j}}] = 1-alpha*dt / dx*dx * -2*n;
-                    else
-                        M[{ {i, j}}] = -alpha*dt / dx*dx * Neighbor<n>(i, j,m)::value;
-                }
-            }
-            
+			for (int i = 0 i < pow(m, n); i++)
+			{
+				M[{ {i, i}}] = 1 - alpha*dt / (dx*dx) * -2 * n;
+				
+				for (int j = 1; j < n + 1; j++)
+				{
+					if (i / pow(m, j) = (i + m) / pow(m, j)
+						M[{ {i, i+m}}] = 1 - alpha*dt / (dx*dx) * 1 * n;
+						
+					if (i / pow(m, j) = (i - m) / pow(m, j)
+						M[{ {i, i-m}}] = 1 - alpha*dt / (dx*dx) * 1 * n;
+
+				}
+			}         
             
             // Build initial temperature distribution
             if(n == 1){

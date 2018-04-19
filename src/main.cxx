@@ -8,6 +8,7 @@
 #include <math.h>
 #include <cmath>
 #include <stdio.h>
+#include <cstdio>
 
 // Home made headers
 #include "vector.hxx"
@@ -36,20 +37,20 @@ int main(){
     int m = 3;
     int const n = 1;
 
-    std::cout << "1D M Matrix with test values: " << std::endl;
+	std::cout << "1D M Matrix with test values: " << std::endl;
     Heat<n> MatrixCheck1D(alpha, m, dt);
     MatrixCheck1D.M.print();
     
 // Check if the solve and exact functions return the same values for 1D
-    Vector<double> exactCheck1D = MatrixCheck1D.exact(0.1);
+   // Vector<double> exactCheck1D = MatrixCheck1D.exact(0.1);
 
     std::cout << "\n1D Matrix with test values, exact at t = 1: " << std::endl;
-    exactCheck1D.print();
+    //exactCheck1D.print();
     
     try {
-        Vector<double> solveCheck1D = MatrixCheck1D.solve(0.1);
+      //  Vector<double> solveCheck1D = MatrixCheck1D.solve(0.1);
         std::cout << "\n1D Matrix with test values, solve at t = 1: " << std::endl;
-        solveCheck1D.print();
+        //solveCheck1D.print();
     } catch (const char* msg)
     {
         std::cerr << msg << std::endl;
@@ -76,5 +77,6 @@ int main(){
     }
     
     std::cout << " ------------------------------- " << std::endl;
+	std::getchar();
     return 0;
 }

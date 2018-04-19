@@ -8,7 +8,7 @@ int cg(const Matrix<T> &A, const Vector<T> &b, Vector<T> &x, T tol, int maxiter)
     Vector<T> r = b - helperA.matvec(b), p(r), rNew;
     T alpha, beta;
     auto k = 0;
-        while(k < maxiter and tol*tol<dot(r,r))
+        while(k < maxiter && tol*tol<dot(r,r))
         {
             alpha = dot(r, r) / dot(helperA.matvec(p), p);
             x = x + alpha*p;
