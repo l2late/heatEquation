@@ -102,6 +102,7 @@ public:
     void print()
     {
         std::printf("Vector datatype: %s \n", typeid(data[0]).name());
+        std::printf("Vector length: %u \n", length);
         for(auto i=0; i<length; i++)
             std::printf("% 6.4f, ", data[i]);
         std::printf("\n\n");
