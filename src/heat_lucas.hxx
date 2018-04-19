@@ -135,8 +135,8 @@ class Heat
 					int d = i + pow(m, j);
 					int e = i - pow(m, j);
 
-					std::cout << "i value = "<<  a << ", left value ="<< c << ", right neigh value =" << b << std::endl;
-					std::cout << "d =  " << d << ",  e =" << e << ", n = "<< n <<std::endl;
+					std::cout << "i value = "<<  a << ", left value = "<< c << ", right neigh value = " << b << std::endl;
+					std::cout << "d =  " << d << ",  e = " << e << ", n = "<< n <<std::endl;
 
 					if (a == b && d < pow(m,n))
 						M[{ {i, d}}] = - alpha*dt / (dx*dx);
@@ -144,8 +144,6 @@ class Heat
 
 					if (a == c && e > -1)
 						M[{ {i, e}}] = - alpha*dt / (dx*dx);
-
-
 				}
 			}         
             
