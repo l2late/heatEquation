@@ -18,7 +18,6 @@ public:
                 M[{{i+1,i}}] =  M[{{i,i+1}}];
             }
         }
-        
 		for (int i = 0; i<m; i++)
 			wStart[i] = sin(pi*(i+1)*dx);
 	}
@@ -39,7 +38,6 @@ public:
 			iterations = cg(M, w, w, 0.00001, 50);
             if (iterations == -1) throw "\nMaximum number of iterations: did not find solution within the maximum tolerance (Conjugate Gradient)";
 		}
-
 		return w;
 	}
 
@@ -112,9 +110,8 @@ class Heat2D
 };
 
 
-
-
-
+// Recursively compute the initial heat distribution for n dimensions
+// function template
 template<int n>
 double CalculateWStart(int i, int m, double dx)
 {
@@ -126,16 +123,13 @@ double CalculateWStart(int i, int m, double dx)
 	return sin(pi*(index + 1)*dx)*CalculateWStart<n - 1>(j, m, dx);
 };
 
-
+// function specialization for n = 1
 template<>
 double CalculateWStart<1>(int i, int m, double dx)
 {
 	// std::cout << "calculating the " << i+1  << "th index in the dimension: " << 1 << std::endl;
 	return sin(pi*(i + 1)*dx);
 };
-
-
-
 
 template<int n>
 class Heat
@@ -157,7 +151,6 @@ class Heat
 
 					if ((int)(i / pow(m, j + 1)) == (int)((i - pow(m, j)) / pow(m, j + 1)) && (int)(i - pow(m, j)) > -1)
 						M[{{i, (int)(i - pow(m, j))}}] = - alpha*dt / (dx*dx);
-
 				}
 			}                     
             
@@ -166,7 +159,6 @@ class Heat
 			{
 					wStart[i] = CalculateWStart<n>(i, m, dx);	
 			}
-			
         }
 
         // Methods
