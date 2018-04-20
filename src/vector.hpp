@@ -2,12 +2,15 @@
 template<typename T>
 class Vector {
 public:
+    //Default constructor
     Vector()
     : data(nullptr), length(0) {}
     
+    //Length contsructor
     Vector(int length)
     : data(new T[length]), length(length) {}
     
+    //Copy constructor
     Vector(const Vector<T>& vector)
     : Vector(vector.length)
     {
@@ -15,12 +18,14 @@ public:
             data[i] = vector.data[i];
     }
     
+    //List constructor
     Vector(std::initializer_list<T> list)
     : Vector(list.size())
     {
         std::uninitialized_copy(list.begin(), list.end(), data);
     }
     
+    //Destructor
     ~Vector()
     {
         length = 0;
@@ -38,6 +43,7 @@ public:
         return data[i];
     }
     
+    //Copy assignment
     Vector<T> & operator=(const Vector<T>& other)
     {
         delete[] data;
@@ -45,10 +51,11 @@ public:
         data = new T[other.length];
         for(auto i = 0; i < other.length; i++)
             data[i] = other[i];
-        return* this;
+        return *this;
     }
     
-    Vector<T> operator=(Vector<T>&& other)
+    //Move assignment
+    Vector<T> & operator=(Vector<T>&& other)
     {
         delete[] data;
         length = other.size();
@@ -61,28 +68,30 @@ public:
         return *this;
     }
     
-    // Not completely sure on the throw in this operation
     template<typename U>
     auto operator+(const Vector<U> &other) const
     {
         if(length != other.length)
-            throw "Vectors are of different size";
+            throw "Addition: Vectors are of different size";
         else {
             Vector<decltype(data[1] + other[1])> newVector(length);
             for(auto i=0; i<length; i++)
                 newVector[i] = data[i]+other[i];
             return newVector;
         }
-        
     }
     
     template<typename U>
     auto operator-(const Vector<U> other) const
     {
+        if(length != other.length)
+            throw "Substraction: Vectors are of different size";
+        else {
         Vector<decltype(data[1] - other[1])> newVector(length);
         for(auto i=0; i<length; i++)
             newVector[i] = data[i]-other[i];
         return newVector;
+        }
     }
     
     template<typename S>
@@ -110,7 +119,6 @@ public:
 
     
 private:
-    
     T* data;
     int length;
     
@@ -126,12 +134,14 @@ auto operator*(const S scalar, const Vector<T> vector)
     return newVector;
 }
 
-// Why not return a common type?
-template<typename T>
-T dot(const Vector<T>& l, const Vector<T>& r)
+template<typename T, typename S>
+auto dot(const Vector<T>& l, const Vector<S>& r)
 {
-    T dotproduct(0);
-    for(auto i=0; i<l.size(); i++)
-        dotproduct += l[i]*r[i];
-    return dotproduct;
+    if(l.size() != r.size()){
+        throw "Vectors are of different size";}
+    else{
+        decltype(l[0]*r[0]) dotproduct(0);
+        for(auto i=0; i<l.size(); i++)
+            dotproduct += l[i]*r[i];
+        return dotproduct;}
 }
