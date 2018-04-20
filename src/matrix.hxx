@@ -18,11 +18,6 @@ public:
         }
     };
     
-    ~Matrix()
-    {
-        dataMap.clear();
-    };
-    
     auto & operator [](const keytype key)
     {
         return dataMap[key];
