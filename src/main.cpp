@@ -104,7 +104,7 @@ int main(){
 
     // Initialize solver parameters
     double alpha = 0.3125;
-    double dt = 0.001;
+    double dt = 0.1;
     int m = 3;
 
     // TEST generation of M matrix
