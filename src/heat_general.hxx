@@ -65,7 +65,7 @@ class Heat
             Vector<double> w(wStart); // Initialize w with w at t=0
             int iterations;
 
-            for (auto t = 0; t<t_end; t += dt)
+            for (double t = 0; t<t_end; t += dt)
             {
                 iterations = cg(M, w, w, 0.0001, 50);
             }
