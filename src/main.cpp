@@ -25,6 +25,10 @@ int main(){
     std::cout << " ------------------------------- " << std::endl;
     std::cout << "\nTest vector and matrix class implementations:" << std::endl;
     
+    std::cout << "Check vector default constructor: Vector<double> a" << std::endl;
+    Vector<double> a1;
+    a1.print();
+    
     std::cout << "Check vector constructor: Vector<double> a(5)" << std::endl;
     Vector<double> a(5);
     a.print();
@@ -100,12 +104,13 @@ int main(){
 
     // Initialize solver parameters
     double alpha = 0.3125;
-    double dt = 0.1;
+    double dt = 0.001;
     int m = 3;
 
-    // TEST vector and matrix class implementations
+    // TEST generation of M matrix
     std::cout << " ------------------------------- " << std::endl;
     std::cout << "\nTest generation of M Matrix:\n" << std::endl;
+    
     // 1D
     // 1D specialization
     std::cout << "1D Heat equation: M Matrix with test values: " << std::endl;
