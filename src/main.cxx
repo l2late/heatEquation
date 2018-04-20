@@ -11,6 +11,7 @@
 #include <cstdio>
 
 // Home made headers
+static const double pi = 3.14159265358979323846;
 #include "vector.hxx"
 #include "matrix.hxx"
 #include "cg.hxx"

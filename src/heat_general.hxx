@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
 
-const double pi = 3.14159265358979323846;
+//const double pi = 3.14159265358979323846;
 
 // Recursively compute the initial heat distribution for n dimensions
 // function template
@@ -73,7 +73,13 @@ class Heat
 
             return w;
         }
+		
+		void print()
+		{
+			M.print();
+		}
 
+private:
     Matrix<double> M;
     int const m;
     double const alpha;
