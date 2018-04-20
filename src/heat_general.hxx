@@ -40,14 +40,8 @@ public:
 		}
 		return w;
 	}
-    
-    // Print function for printing attribute M
-    void print()
-    {
-        M.print();
-    }
 
-private:
+public:
 	Matrix<double> M;
 	int const m;
 	double const alpha;
@@ -106,14 +100,8 @@ class Heat2D
 
 			return w;
 		}
-    
-    // Print function for printing attribute M
-    void print()
-    {
-        M.print();
-    }
 
-	private:
+	public:
 		Matrix<double> M;
 		int const m;
 		double const alpha;
@@ -130,6 +118,8 @@ double CalculateWStart(int i, int m, double dx)
 	int index = (int)(i / pow(m, n - 1));
 	double j = i - (int)(index *pow(m, n - 1));
 	
+//	std::cout << "calculating the " << index + 1 << "th index in the dimension: " << n << std::endl;
+	//std::cout << "index in layer below =  " << j << std::endl;
 	return sin(pi*(index + 1)*dx)*CalculateWStart<n - 1>(j, m, dx);
 };
 
@@ -137,6 +127,7 @@ double CalculateWStart(int i, int m, double dx)
 template<>
 double CalculateWStart<1>(int i, int m, double dx)
 {
+	// std::cout << "calculating the " << i+1  << "th index in the dimension: " << 1 << std::endl;
 	return sin(pi*(i + 1)*dx);
 };
 
@@ -181,7 +172,7 @@ class Heat
             Vector<double> w(wStart); // Initialize w with w at t=0
             int iterations;
 
-            for (double t = 0; t<t_end; t += dt)
+            for (auto t = 0; t<t_end; t += dt)
             {
                 iterations = cg(M, w, w, 0.0001, 50);
             }
@@ -189,17 +180,10 @@ class Heat
 
             return w;
         }
-    
-        // Print function for printing attribute M
-        void print()
-        {
-            M.print();
-        }
 
-    private:
-        Matrix<double> M;
-        int const m;
-        double const alpha;
-        double const dt;
-        Vector<double> wStart;
+    Matrix<double> M;
+    int const m;
+    double const alpha;
+    double const dt;
+    Vector<double> wStart;
 };
