@@ -41,6 +41,16 @@ int main(){
     Vector<double> c = b;
     c.print();
     
+    //Vector addition
+    std::cout << "Check vector addition: Vector<double> cPlus = b + c;" << std::endl;
+    Vector<double> cPlus = b + c;
+    cPlus.print();
+    
+    //Vector substraction
+    std::cout << "Check vector substraction: Vector<double> cMin = b - c;" << std::endl;
+    Vector<double> cMin = b - c;
+    cMin.print();
+    
     // Vector left and right multipliction
     std::cout << "Check vector right multiplication with scalar : c*2 =" << std::endl;
     Vector<double> cRight = c*2;
@@ -55,10 +65,10 @@ int main(){
     double d = dot(c, b);
     std::cout << d << "\n" << std::endl;
     
-    std::cout << "Check vector dot product different lengths: double d = dot(c, b)" << std::endl;
-    Vector<double> q = { 1, 2, 3, 4, 7};
-    double r = dot(q, b);
-    std::cout << r << "\n" << std::endl;
+//    std::cout << "Check vector dot product different lengths: double d = dot(c, b)" << std::endl;
+//    Vector<double> q = { 1, 2, 3, 4, 7};
+//    double r = dot(q, b);
+//    std::cout << r << "\n" << std::endl;
     
     //Matrix default constructor
     std::cout << "Check matrix constructor: Matrix<double> M(2,2)" << std::endl;

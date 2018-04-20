@@ -61,12 +61,11 @@ public:
         return *this;
     }
     
-    // Not completely sure on the throw in this operation
     template<typename U>
     auto operator+(const Vector<U> &other) const
     {
         if(length != other.length)
-            throw "Vectors are of different size";
+            throw "Addition: Vectors are of different size";
         else {
             Vector<decltype(data[1] + other[1])> newVector(length);
             for(auto i=0; i<length; i++)
@@ -78,10 +77,14 @@ public:
     template<typename U>
     auto operator-(const Vector<U> other) const
     {
+        if(length != other.length)
+            throw "Substraction: Vectors are of different size";
+        else {
         Vector<decltype(data[1] - other[1])> newVector(length);
         for(auto i=0; i<length; i++)
             newVector[i] = data[i]-other[i];
         return newVector;
+        }
     }
     
     template<typename S>
@@ -109,7 +112,6 @@ public:
 
     
 private:
-    
     T* data;
     int length;
     
