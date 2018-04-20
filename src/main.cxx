@@ -67,7 +67,7 @@ int main(){
     std::cout << " ------------------------------- " << std::endl;
     std::cout << "\nTest solvers for 1D: " << std::endl;
     
-    // Check if the solve and exact functions return the same values for 1D
+    // Check if the solve and exact functions return similar values for 1D
     Vector<double> exactCheck1D = MatrixCheckN1D.exact(0.1);
     std::cout << "\n1D Matrix with test values, analytic solver at t = 0.1: " << std::endl;
     exactCheck1D.print();
@@ -96,15 +96,18 @@ int main(){
 //    Heat<2> MatrixCheckN2D(alpha, m, dt);
 //    MatrixCheckN2D.M.print();
 
+    
+    // Check if Heat2D is working (attributes are put on public)
+    
     std::cout << " ------------------------------- " << std::endl;
     std::cout << "\nTest solvers for 2D: " << std::endl;
     // Check if the solve and exact functions return similar values for 2D
-    std::cout << "\n2D Matrix with test values, analytic solver at t = 1: " << std::endl;
-    Vector<double> exactCheck2D = MatrixCheckN2D.exact(1);
+    std::cout << "\n2D Matrix with test values, analytic solver at t = 0.5: " << std::endl;
+    Vector<double> exactCheck2D = MatrixCheckN2D.exact(0.5);
     exactCheck2D.print();
     
-    std::cout << "\n2D Matrix with test values, numeric solver at t = 1: " << std::endl;
-    Vector<double> solveCheck2D = MatrixCheckN2D.solve(1);
+    std::cout << "\n2D Matrix with test values, numeric solver at t = 0.5: " << std::endl;
+    Vector<double> solveCheck2D = MatrixCheckN2D.solve(0.5);
     solveCheck2D.print();
     
 
