@@ -45,10 +45,10 @@ public:
         data = new T[other.length];
         for(auto i = 0; i < other.length; i++)
             data[i] = other[i];
-        return* this;
+        return *this;
     }
     
-    Vector<T> operator=(Vector<T>&& other)
+    Vector<T> & operator=(Vector<T>&& other)
     {
         delete[] data;
         length = other.size();
