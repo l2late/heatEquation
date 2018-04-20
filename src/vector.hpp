@@ -73,7 +73,6 @@ public:
                 newVector[i] = data[i]+other[i];
             return newVector;
         }
-        
     }
     
     template<typename U>
@@ -130,8 +129,11 @@ auto operator*(const S scalar, const Vector<T> vector)
 template<typename T>
 T dot(const Vector<T>& l, const Vector<T>& r)
 {
-    T dotproduct(0);
-    for(auto i=0; i<l.size(); i++)
-        dotproduct += l[i]*r[i];
-    return dotproduct;
+    if(l.size() != r.size()){
+        throw "Vectors are of different size";}
+    else{
+        T dotproduct(0);
+        for(auto i=0; i<l.size(); i++)
+            dotproduct += l[i]*r[i];
+        return dotproduct;}
 }
