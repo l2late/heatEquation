@@ -6,7 +6,7 @@ const double pi = 3.14159265358979323846;
 class Heat1D
 {
 public:
-	Heat1D(const double alpha, const int m, const double dt)
+	Heat1D(const double & alpha, const int & m, const double & dt)
 		: M(m, m), m(m), alpha(alpha), dt(dt), wStart(m)
 	{
         double dx = 1/( static_cast<double>(m) +1 );
@@ -23,12 +23,12 @@ public:
 	}
 
 	// Methods
-	Vector<double> exact(double t) const
+	Vector<double> exact(const double & t) const
 	{
         return exp(-pow(pi,2)*alpha*t)*wStart;
 	}
 
-	Vector<double> solve(double t_end) const
+	Vector<double> solve(double & t_end) const
 	{
 		Vector<double> w(wStart); // Initialize w with w at t=0
 		int iterations;
@@ -53,7 +53,7 @@ public:
 class Heat2D 
 {
 	public:
-		Heat2D(const double alpha, const int m, const double dt)
+		Heat2D(const double & alpha, const int & m, const double & dt)
 			: M(m*m, m*m), m(m), alpha(alpha), dt(dt), wStart(m*m)
 		{
             double dx = 1/(static_cast<double>(m)+1);
@@ -82,12 +82,12 @@ class Heat2D
 		}
 
 		// Methods
-		Vector<double> exact(double t) const
+		Vector<double> exact(const double & t) const
 		{
 			return exp(-pow(pi, 2)*2*alpha*t)*wStart;
 		}
 
-		Vector<double> solve(double t_end) const
+		Vector<double> solve(const double & t_end) const
 		{
 			Vector<double> w(wStart); // Initialize w with w at t=0
 			int iterations;
@@ -172,7 +172,7 @@ class Heat
             Vector<double> w(wStart); // Initialize w with w at t=0
             int iterations;
 
-            for (auto t = 0; t<t_end; t += dt)
+            for (double t = 0; t<t_end; t += dt)
             {
                 iterations = cg(M, w, w, 0.0001, 50);
             }
