@@ -15,6 +15,7 @@
 #include "matrix.hxx"
 #include "cg.hxx"
 #include "heat_lucas.hxx"
+#include "heat_general.hxx"
 
 
 int main(){
