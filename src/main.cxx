@@ -12,11 +12,11 @@
 
 // Home made headers
 static const double pi = 3.14159265358979323846;
-#include "vector.hxx"
-#include "matrix.hxx"
-#include "cg.hxx"
-#include "heat.hxx"
-#include "heat_general.hxx"
+#include "vector.hpp"
+#include "matrix.hpp"
+#include "cg.hpp"
+#include "heat.hpp"
+#include "heat_general.hpp"
 
 
 int main(){

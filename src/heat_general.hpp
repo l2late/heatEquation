@@ -1,5 +1,4 @@
 #pragma once
-#include <cmath>
 
 // Recursively compute the initial heat distribution for n dimensions
 // function template
