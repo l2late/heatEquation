@@ -15,7 +15,7 @@ static const double pi = 3.14159265358979323846;
 #include "vector.hxx"
 #include "matrix.hxx"
 #include "cg.hxx"
-#include "heat_lucas.hxx"
+#include "heat.hxx"
 #include "heat_general.hxx"
 
 
