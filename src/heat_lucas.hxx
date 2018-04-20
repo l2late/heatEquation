@@ -40,8 +40,13 @@ public:
 		}
 		return w;
 	}
+    
+    void print()
+    {
+        M.print();
+    }
 
-public:
+private:
 	Matrix<double> M;
 	int const m;
 	double const alpha;
@@ -100,8 +105,14 @@ class Heat2D
 
 			return w;
 		}
+    
+    // Print function.
+    void print()
+    {
+        M.print();
+    }
 
-	public:
+	private:
 		Matrix<double> M;
 		int const m;
 		double const alpha;
@@ -172,7 +183,7 @@ class Heat
             Vector<double> w(wStart); // Initialize w with w at t=0
             int iterations;
 
-            for (auto t = 0; t<t_end; t += dt)
+            for (double t = 0; t<t_end; t += dt)
             {
                 iterations = cg(M, w, w, 0.0001, 50);
             }
@@ -180,10 +191,16 @@ class Heat
 
             return w;
         }
+    
+        void print()
+        {
+            M.print();
+        }
 
-    Matrix<double> M;
-    int const m;
-    double const alpha;
-    double const dt;
-    Vector<double> wStart;
+    private:
+        Matrix<double> M;
+        int const m;
+        double const alpha;
+        double const dt;
+        Vector<double> wStart;
 };
