@@ -39,7 +39,7 @@ int main(){
     Vector<double> matvecCheck = M.matvec(x);
     matvecCheck.print();
 
-    // Check if Heat1D is working (attributes are put on public)
+    // Initialize solver parameters
     double alpha = 0.3125;
     double dt = 0.1;
     int m = 3;
@@ -70,7 +70,7 @@ int main(){
     
     // 3D
     // 3D generalization
-    std::cout << "ND Heat equation for 3 dimension: M Matrix with test values: " << std::endl;
+    std::cout << "ND Heat equation for 3 dimension: " << std::endl;
     Heat<3> MatrixCheckN3D(alpha, m, dt);
     MatrixCheckN3D.print();
     
@@ -103,21 +103,21 @@ int main(){
     std::cout << "\nTest solvers for 2D: " << std::endl;
     
     // Check if the solve and exact functions return similar values for 2D
-    Vector<double> exactCheck2D = MatrixCheck2D.exact(0.1);
-    std::cout << "\nSpecialized 2D Heat solver: M Matrix with test values, analytic solver at t = 0.1: " << std::endl;
+    Vector<double> exactCheck2D = MatrixCheck2D.exact(0.5);
+    std::cout << "\nSpecialized 2D Heat solver: M Matrix with test values, analytic solver at t = 0.5: " << std::endl;
     exactCheck2D.print();
     
-    Vector<double> solveCheck2D = MatrixCheck2D.solve(0.1);
-    std::cout << "\nSpecialized 2D Heat solver: M Matrix with test values, numeric solver at t = 0.1: " << std::endl;
+    Vector<double> solveCheck2D = MatrixCheck2D.solve(0.5);
+    std::cout << "\nSpecialized 2D Heat solver: M Matrix with test values, numeric solver at t = 0.5: " << std::endl;
     solveCheck2D.print();
     
     // Check if the solve and exact functions return similar values for 2D
-    Vector<double> exactCheckN2D = MatrixCheckN2D.exact(0.1);
-    std::cout << "\nGeneralized 2D Heat solver: M Matrix with test values, analytic solver at t = 0.1: " << std::endl;
+    Vector<double> exactCheckN2D = MatrixCheckN2D.exact(0.5);
+    std::cout << "\nGeneralized 2D Heat solver: M Matrix with test values, analytic solver at t = 0.5: " << std::endl;
     exactCheckN2D.print();
     
-    Vector<double> solveCheckN2D = MatrixCheckN2D.solve(0.1);
-    std::cout << "\nGeneralized 2D Heat solver: M Matrix with test values, numeric solver at t = 0.1: " << std::endl;
+    Vector<double> solveCheckN2D = MatrixCheckN2D.solve(0.5);
+    std::cout << "\nGeneralized 2D Heat solver: M Matrix with test values, numeric solver at t = 0.5: " << std::endl;
     solveCheckN2D.print();
     
 
@@ -126,28 +126,14 @@ int main(){
     std::cout << "\nTest solvers for 3D: " << std::endl;
     
     // Check if the solve and exact functions return similar values for 3D
-    Vector<double> exactCheckN3D = MatrixCheckN3D.exact(0.1);
-    std::cout << "\nSpecialized 3D Heat solver: M Matrix with test values, analytic solver at t = 0.1: " << std::endl;
+    Vector<double> exactCheckN3D = MatrixCheckN3D.exact(0.5);
+    std::cout << "\nSpecialized 3D Heat solver: analytic solver at t = 0.5: " << std::endl;
     exactCheckN3D.print();
     
-    Vector<double> solveCheckN3D = MatrixCheckN3D.solve(0.1);
-    std::cout << "\nSpecialized 3D Heat solver: M Matrix with test values, numeric solver at t = 0.1: " << std::endl;
+    Vector<double> solveCheckN3D = MatrixCheckN3D.solve(0.5);
+    std::cout << "\nSpecialized 3D Heat solver: numeric solver at t = 0.5: " << std::endl;
     solveCheckN3D.print();
     
-    /*
-    std::cout << "\n2D Matrix with test values, exact at t = 1: " << std::endl;
-    exactCheck2D.print();
-    
-    try {
-        Vector<double> solveCheck2D = MatrixCheck2D.solve(1);
-        std::cout << "\n2D Matrix with test values, solve at t = 1: " << std::endl;
-        solveCheck2D.print();
-    } catch (const char* msg)
-    {
-        std::cerr << msg << std::endl;
-    }
-    */
     std::cout << " ------------------------------- " << std::endl;
-	//std::getchar();
     return 0;
 }
