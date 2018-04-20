@@ -7,9 +7,7 @@ double CalculateWStart(int i, int m, double dx)
 {
 	int index = (int)(i / pow(m, n - 1));
 	double j = i - (int)(index *pow(m, n - 1));
-	
-//	std::cout << "calculating the " << index + 1 << "th index in the dimension: " << n << std::endl;
-	//std::cout << "index in layer below =  " << j << std::endl;
+
 	return sin(pi*(index + 1)*dx)*CalculateWStart<n - 1>(j, m, dx);
 };
 
@@ -17,10 +15,10 @@ double CalculateWStart(int i, int m, double dx)
 template<>
 double CalculateWStart<1>(int i, int m, double dx)
 {
-	// std::cout << "calculating the " << i+1  << "th index in the dimension: " << 1 << std::endl;
 	return sin(pi*(i + 1)*dx);
 };
 
+//Generalized template
 template<int n>
 class Heat
 {
@@ -52,11 +50,13 @@ class Heat
         }
 
         // Methods
+        // Analytic solver
         Vector<double> exact(double t) const
         {
             return exp(-pow(pi, 2)*alpha*t*n)*wStart;
         }
-
+    
+        // Numeric conjugate gradient solver
         Vector<double> solve(double t_end) const
         {
             Vector<double> w(wStart); // Initialize w with w at t=0
@@ -71,6 +71,7 @@ class Heat
             return w;
         }
 		
+        // print method for printing M attribute
 		void print()
 		{
 			M.print();

@@ -20,11 +20,13 @@ public:
 	}
 
 	// Methods
+    // Analytic solver
 	Vector<double> exact(double t) const
 	{
         return exp(-pow(pi,2)*alpha*t)*wStart;
 	}
 
+    // Numeric conjugate gradient solver
 	Vector<double> solve(double t_end) const
 	{
 		Vector<double> w(wStart); // Initialize w with w at t=0
@@ -85,11 +87,13 @@ class Heat2D
 		}
 
 		// Methods
+        // Analytic solver
 		Vector<double> exact(double t) const
 		{
 			return exp(-pow(pi, 2)*2*alpha*t)*wStart;
 		}
 
+        // Numeric conjugate gradient solver
 		Vector<double> solve(double t_end) const
 		{
 			Vector<double> w(wStart); // Initialize w with w at t=0
