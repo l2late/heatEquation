@@ -13,8 +13,6 @@ int cg(const Matrix<T> &A, const Vector<T> &b, Vector<T> &x, T tol, int maxiter)
             alpha = dot(r, r) / dot(helperA.matvec(p), p);
             x = x + alpha*p;
             rNew = r - alpha*helperA.matvec(p);
-//            if (dot(rNew, rNew) < tol*tol)
-//                break;
             beta = dot(rNew, rNew) / dot(r, r);
             p = rNew + beta*p;
             r = rNew;
