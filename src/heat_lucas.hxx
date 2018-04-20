@@ -28,7 +28,7 @@ public:
         return exp(-pow(pi,2)*alpha*t)*wStart;
 	}
 
-	Vector<double> solve(double & t_end) const
+	Vector<double> solve(const double & t_end) const
 	{
 		Vector<double> w(wStart); // Initialize w with w at t=0
 		int iterations;
@@ -47,7 +47,7 @@ public:
         M.print();
     }
 
-private:
+public:
 	Matrix<double> M;
 	int const m;
 	double const alpha;
@@ -120,7 +120,6 @@ class Heat2D
 		double const dt;
 		Vector<double> wStart;
 };
-
 
 // Recursively compute the initial heat distribution for n dimensions
 // function template
